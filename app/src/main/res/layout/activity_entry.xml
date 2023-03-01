@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#eb690a"
+    android:orientation="vertical">
+
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:layout_width="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_height="300dp"
+        app:lottie_rawRes="@raw/hello"
+        app:lottie_loop="true"
+        app:lottie_autoPlay="true">
+    </com.airbnb.lottie.LottieAnimationView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Welcome"
+        android:textColor="@color/white"
+        android:textSize="50dp">
+    </TextView>
+
+    <TextView
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="We will help you to connect with your collegemates to Buy or sell any of their things through application"
+        android:textSize="15dp"
+        android:textColor="#FFFFFF"
+        android:layout_marginTop="-10dp"
+        android:textAlignment="center"
+        android:fontFamily="@font/poppins_bold">
+    </TextView>
+
+    <Button
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:backgroundTint="@color/white"
+        android:layout_marginTop="80dp"
+        android:text="Get Started"
+        android:onClick="signup"
+        android:textColor="#eb690a"
+        android:textAllCaps="false"
+        android:textSize="20dp"
+        android:fontFamily="@font/poppins_bold">
+    </Button>
+
+    <Button
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:backgroundTint="@color/white"
+        android:layout_marginTop="10dp"
+        android:text="Already have an account?"
+        android:textColor="#eb690a"
+        android:textAllCaps="false"
+        android:onClick="login"
+        android:textSize="16dp"
+        android:fontFamily="@font/poppins_bold">
+    </Button>
+</androidx.appcompat.widget.LinearLayoutCompat>

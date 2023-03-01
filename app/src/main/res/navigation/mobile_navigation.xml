@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_dashboard">
+
+    <fragment
+        android:id="@+id/navigation_dashboard"
+        android:name="com.example.sellnbuy.ui.dashboard.DashboardFragment"
+        android:label="Dashboard"
+        tools:layout="@layout/fragment_dashboard" />
+
+    <fragment
+        android:id="@+id/navigation_Product"
+        android:name="com.example.sellnbuy.ui.product.ProductFragment"
+        android:label="Product"
+        tools:layout="@layout/fragment_product"/>
+
+    <fragment
+        android:id="@+id/navigation_Order"
+        android:name="com.example.sellnbuy.ui.Order.OrderFragment"
+        android:label="Orders"
+        tools:layout="@layout/fragment_orders" />
+</navigation>
