@@ -62,89 +62,89 @@ class firestore {
             }
             .addOnFailureListener { e ->
             }
-
-    }
-
-    fun updateUserProfileData(activity: Activity, userHashMap: HashMap<String, Any>) {
-
-        mfirestore.collection(Constants.USERS)
-            .document(getCurrentUserID())
-            .update(userHashMap)
-            .addOnSuccessListener {
-
-                // Notify the success result.
-                when (activity) {
-                    is profile -> { // Call a function of base activity for transferring the result to it.
-                        activity.userProfileUpdateSuccess()
-                    }
-                }
-            }
-            .addOnFailureListener { e ->
-
-                when (activity) {
-                    is profile -> {
-                    }
-                }
-
-                Log.e(
-                    activity.javaClass.simpleName,
-                    "Error while updating the user details.", e
-                )
-            }
-    }
-
-    fun uploadImageToCloudStorage(activity: Activity, imageFileURI: Uri?) {
-
-        val sRef: StorageReference = FirebaseStorage.getInstance().reference.child(
-            Constants.USER_PROFILE_IMAGE + System.currentTimeMillis() + "."
-                    + Constants.getFileExtension(
-                activity,
-                imageFileURI
-            )
-        )
-
-        //adding the file to reference
-        sRef.putFile(imageFileURI!!)
-            .addOnSuccessListener { taskSnapshot ->
-                // The image upload is success
-                Log.e(
-                    "Firebase Image URL",
-                    taskSnapshot.metadata!!.reference!!.downloadUrl.toString()
-                )
-
-                // Get the downloadable url from the task snapshot
-                taskSnapshot.metadata!!.reference!!.downloadUrl
-                    .addOnSuccessListener { uri ->
-                        Log.e("Downloadable Image URL", uri.toString())
-
-                        // TODO Step 8: Pass the success result to base class.
-                        // START
-                        // Here call a function of base activity for transferring the result to it.
-                        when (activity) {
-                            is profile -> {
-                                activity.imageUploadSuccess(uri.toString())
-                            }
-                        }
-                        // END
-                    }
-            }
-            .addOnFailureListener { exception ->
-
-                // Hide the progress dialog if there is any error. And print the error in log.
-                when (activity) {
-                    is profile -> {
-
-                    }
-                }
-
-                Log.e(
-                    activity.javaClass.simpleName,
-                    exception.message,
-                    exception
-                )
-            }
     }
 }
+
+//    fun updateUserProfileData(activity: Activity, userHashMap: HashMap<String, Any>) {
+//
+//        mfirestore.collection(Constants.USERS)
+//            .document(getCurrentUserID())
+//            .update(userHashMap)
+//            .addOnSuccessListener {
+//
+//                // Notify the success result.
+//                when (activity) {
+//                    is profile -> { // Call a function of base activity for transferring the result to it.
+//                        activity.userProfileUpdateSuccess()
+//                    }
+//                }
+//            }
+//            .addOnFailureListener { e ->
+//
+//                when (activity) {
+//                    is profile -> {
+//                    }
+//                }
+//
+//                Log.e(
+//                    activity.javaClass.simpleName,
+//                    "Error while updating the user details.", e
+//                )
+//            }
+//    }
+//
+//    fun uploadImageToCloudStorage(activity: Activity, imageFileURI: Uri?) {
+//
+//        val sRef: StorageReference = FirebaseStorage.getInstance().reference.child(
+//            Constants.USER_PROFILE_IMAGE + System.currentTimeMillis() + "."
+//                    + Constants.getFileExtension(
+//                activity,
+//                imageFileURI
+//            )
+//        )
+//
+//        //adding the file to reference
+//        sRef.putFile(imageFileURI!!)
+//            .addOnSuccessListener { taskSnapshot ->
+//                // The image upload is success
+//                Log.e(
+//                    "Firebase Image URL",
+//                    taskSnapshot.metadata!!.reference!!.downloadUrl.toString()
+//                )
+//
+//                // Get the downloadable url from the task snapshot
+//                taskSnapshot.metadata!!.reference!!.downloadUrl
+//                    .addOnSuccessListener { uri ->
+//                        Log.e("Downloadable Image URL", uri.toString())
+//
+//                        // TODO Step 8: Pass the success result to base class.
+//                        // START
+//                        // Here call a function of base activity for transferring the result to it.
+//                        when (activity) {
+//                            is profile -> {
+//                                activity.imageUploadSuccess(uri.toString())
+//                            }
+//                        }
+//                        // END
+//                    }
+//            }
+//            .addOnFailureListener { exception ->
+//
+//                // Hide the progress dialog if there is any error. And print the error in log.
+//                when (activity) {
+//                    is profile -> {
+//
+//                    }
+//                }
+//
+//                Log.e(
+//                    activity.javaClass.simpleName,
+//                    exception.message,
+//                    exception
+//                )
+//            }
+//    }
+//}
 
 
 

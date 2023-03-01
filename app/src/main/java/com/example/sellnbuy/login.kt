@@ -72,7 +72,7 @@ class login : AppCompatActivity() {
                         {
                             firestore().getUserDetails(this)
                             pb.visibility= View.GONE
-                            val intent=Intent(this,dashboard::class.java)
+                            val intent=Intent(this,profile::class.java)
                             startActivity(intent)
                             finish()
                         }
