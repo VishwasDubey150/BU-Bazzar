@@ -46,9 +46,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/cardView"
         app:layout_constraintVertical_bias="0.63">
-
-
-
+        
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -89,8 +87,9 @@
             android:ems="10"
             android:hint="email"
             android:inputType="textPersonName"
-            android:padding="11dp"
-            android:textAlignment="center"
+            android:paddingTop="11dp"
+            android:paddingBottom="11dp"
+            android:paddingLeft="20dp"
             android:text="" />
 
         <EditText
@@ -106,9 +105,10 @@
             android:ems="10"
             android:hint="Password"
             android:inputType="textPassword"
-            android:padding="10dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
             android:text=""
-            android:textAlignment="center"
+            android:paddingLeft="20dp"
             />
 
         <TextView

@@ -8,16 +8,24 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.text.TextUtils
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.ProgressBar
+import android.widget.RadioButton
+import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.view.isEmpty
+import com.bumptech.glide.Glide
 import com.example.sellnbuy.Constants.showImageChooser
 import com.example.sellnbuy.firestore.firestore
 import com.example.sellnbuy.model.User
+import kotlinx.android.synthetic.main.activity_main.view.*
+import java.io.IOException
 
 class profile : baseActivity() {
     @SuppressLint("RestrictedApi")
@@ -61,13 +69,10 @@ class profile : baseActivity() {
             userDetails=intent.getParcelableExtra(Constants.EXTRA_USER_DETAILS)!!
         }
 
-        name.isEnabled=false
         name.setText(userDetails.Username)
 
-        contact.isEnabled=false
         contact.setText(userDetails.mobile)
 
-        email.isEnabled=false
         name.setText(userDetails.email)
     }
 
@@ -90,6 +95,30 @@ class profile : baseActivity() {
         }
     }
 
+    public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        val iv_profile_user_image = findViewById<ImageView>(R.id.img)
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == PICK_IMAGE_REQUEST_CODE) {
+                if (data != null) {
+                    try {
+                        mselectedImageFileUri = data.data!!
+                        Glide
+                            .with(this)
+                            .load(mselectedImageFileUri)
+                            .centerCrop()
+                            .placeholder(R.drawable.profile)
+                            .into(iv_profile_user_image)
+                    } catch (e: IOException) {
+                        e.printStackTrace()
+                        Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        }
+    }
+
+
     fun showImageChooser(activity: Activity) {
         val galleryIntent = Intent(
             Intent.ACTION_PICK,
@@ -98,7 +127,52 @@ class profile : baseActivity() {
         startActivityForResult(galleryIntent, PICK_IMAGE_REQUEST_CODE)
     }
 
-    fun back(view: View) {
-        startActivity(Intent(this,dashboard::class.java))
+    fun submit(view: View) {
+        if (validateDetails())
+        {
+            Toast.makeText(this,"Profile successfully updated",Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this@profile,dashboard::class.java))
+        }
+    }
+
+    private fun validateDetails(): Boolean {
+        val name = findViewById<EditText>(R.id.name)
+        val email = findViewById<EditText>(R.id.email)
+        val contact = findViewById<EditText>(R.id.mobile)
+        val address=findViewById<EditText>(R.id.address)
+        val gender=findViewById<RadioGroup>(R.id.gender)
+        val male=findViewById<RadioButton>(R.id.m)
+        val female=findViewById<RadioButton>(R.id.f)
+        val img=findViewById<ImageView>(R.id.img)
+        var pb=findViewById<ProgressBar>(R.id.pbL)
+
+        return when {
+
+            TextUtils.isEmpty(email.text.toString().trim { it <= ' ' }) -> {
+                Toast.makeText(this, "Please complete the profile", Toast.LENGTH_SHORT).show()
+                false
+
+            }
+            TextUtils.isEmpty(name.text.toString().trim { it <= ' ' }) -> {
+                Toast.makeText(this, "Please complete the profile", Toast.LENGTH_SHORT).show()
+                false
+            }
+            TextUtils.isEmpty(contact.text.toString().trim { it <= ' ' }) -> {
+                Toast.makeText(this, "Please complete the profile", Toast.LENGTH_SHORT).show()
+                false
+            }
+            TextUtils.isEmpty(address.text.toString().trim { it <= ' ' }) -> {
+                Toast.makeText(this, "Please complete the profile", Toast.LENGTH_SHORT).show()
+                false
+            }
+
+            !male.isChecked and !female.isChecked-> {
+                Toast.makeText(this, "Please complete the profile", Toast.LENGTH_SHORT).show()
+                false
+            }
+            else -> {
+                true
+            }
+        }
     }
 }
