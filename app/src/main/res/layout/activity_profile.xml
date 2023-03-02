@@ -28,6 +28,7 @@
     </TextView>
 
     <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/img"
         android:layout_height="150dp"
         android:layout_width="150dp"
         android:layout_gravity="center"
@@ -64,6 +65,7 @@
 
             <EditText
                 android:id="@+id/name"
+                android:inputType="textPersonName"
                 android:layout_width="300dp"
                 android:layout_gravity="center"
                 android:layout_height="wrap_content"
@@ -96,6 +98,24 @@
                 android:hint="Contact no."
                 android:background="@drawable/signup_et_bg">
             </EditText>
+
+            <EditText
+                android:id="@+id/email"
+                android:layout_width="300dp"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppins_bold"
+                android:textSize="20dp"
+                android:paddingLeft="20dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingRight="20dp"
+                android:elevation="5dp"
+                android:hint="email"
+                android:background="@drawable/signup_et_bg">
+            </EditText>
+
 
             <EditText
                 android:id="@+id/address"

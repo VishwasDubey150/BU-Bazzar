@@ -11,7 +11,7 @@ import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
 import com.example.sellnbuy.firestore.firestore
-import com.example.sellnbuy.model.Userr
+import com.example.sellnbuy.model.User
 import com.google.firebase.auth.FirebaseAuth
 
 class login : AppCompatActivity() {
@@ -24,10 +24,8 @@ class login : AppCompatActivity() {
         val password = findViewById<EditText>(R.id.password2)
         var pb=findViewById<ProgressBar>(R.id.pbL)
         pb.visibility= View.GONE
-
-
     }
-    fun userLoggedInSuccess(user: Userr) {
+    fun userLoggedInSuccess(user: User) {
         Log.i("Username : ",user.Username)
         Log.i("email : ",user.email)
     }
@@ -72,9 +70,7 @@ class login : AppCompatActivity() {
                         {
                             firestore().getUserDetails(this)
                             pb.visibility= View.GONE
-                            val intent=Intent(this,profile::class.java)
-                            startActivity(intent)
-                            finish()
+                            godirectprofile(User())
                         }
                         else
                         {
@@ -100,22 +96,19 @@ class login : AppCompatActivity() {
         startActivity(intent)
     }
 
-    fun godirectprofile(user:Userr)
+    fun godirectprofile(user:User)
     {
-        if(user.profileCompleted==0)
-        {
-            val intent=Intent(this@login,profile::class.java)
+        if (user.profileCompleted == 0) {
+            val intent = Intent(this@login, profile::class.java)
+            intent.putExtra(Constants.EXTRA_USER_DETAILS, user)
             startActivity(intent)
-            finish()
-            Toast.makeText(this,"Please fill your details first",Toast.LENGTH_LONG).show()
+        } else {
+            startActivity(Intent(this@login, MainActivity::class.java))
         }
-        else
-        {
-            val intent=Intent(this@login,MainActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
+        finish()
+    }
+    fun backk(view: View) {
+        startActivity(Intent(this@login,Entry::class.java))
     }
 }
-
 

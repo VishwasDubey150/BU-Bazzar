@@ -3,23 +3,19 @@ package com.example.sellnbuy.firestore
 import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
-import android.net.Uri
 import android.util.Log
 import com.example.sellnbuy.Constants
 import com.example.sellnbuy.login
-import com.example.sellnbuy.model.Userr
-import com.example.sellnbuy.profile
+import com.example.sellnbuy.model.User
 import com.example.sellnbuy.sign_up
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
-import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageReference
 
 class firestore {
     private val mfirestore = FirebaseFirestore.getInstance()
 
-    fun registerUser(activity: sign_up, userInfo: Userr) {
+    fun registerUser(activity: sign_up, userInfo: User) {
         mfirestore.collection(Constants.USERS)
             .document(userInfo.id)
             .set(userInfo, SetOptions.merge())
@@ -40,11 +36,10 @@ class firestore {
             .get()
             .addOnSuccessListener { document ->
                 Log.i(activity.javaClass.simpleName, document.toString())
-                val user = document.toObject(Userr::class.java)!!
+                val user = document.toObject(User::class.java)!!
                 val sharedPreferences = activity.getSharedPreferences(
                     Constants.Sellnbuy_pref,
-                    Context.MODE_PRIVATE
-                )
+                    Context.MODE_PRIVATE)
 
                 val editor: SharedPreferences.Editor = sharedPreferences.edit()
                 editor.putString(

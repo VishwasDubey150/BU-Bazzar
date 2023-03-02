@@ -19,9 +19,9 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="300dp"
-        android:layout_height="600dp"
+        android:layout_height="550dp"
         android:layout_gravity="center"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="70dp"
         android:background="@color/white"
         android:backgroundTint="@color/white"
         app:cardElevation="50dp"
@@ -44,6 +44,7 @@
 
             <EditText
                 android:id="@+id/un1"
+                android:inputType="textPersonName"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -131,7 +132,7 @@
                 android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:text="Create account"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="10dp"
                 android:textAllCaps="false"
                 android:textSize="15dp"
                 android:fontFamily="@font/poppins_bold">

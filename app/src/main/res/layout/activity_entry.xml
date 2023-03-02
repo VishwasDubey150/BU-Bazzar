@@ -34,7 +34,7 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="We will help you to connect with your collegemates to Buy or sell any of their things through application"
+        android:text="We will help you to connect with the people of country to Buy or sell any of their things through application"
         android:textSize="15dp"
         android:textColor="#FFFFFF"
         android:layout_marginTop="-10dp"

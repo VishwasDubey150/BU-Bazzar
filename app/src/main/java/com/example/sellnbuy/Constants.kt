@@ -12,6 +12,7 @@ object Constants {
     const val Loggedin_un:String="loggedin_un"
     const val READ_STORAGE_PERMISSION_CODE = 2
     const val PICK_IMAGE_REQUEST_CODE = 2
+    const val EXTRA_USER_DETAILS: String="extra_user_details"
     const val USERNAME="username"
     const val ADDRESS:String="address";
     const val MOBILE:String="mobile";
