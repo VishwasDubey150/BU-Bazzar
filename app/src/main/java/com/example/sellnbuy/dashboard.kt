@@ -1,8 +1,11 @@
 package com.example.sellnbuy
 
+import android.opengl.Visibility
 import android.os.Bundle
+import android.view.View
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -30,5 +33,20 @@ class dashboard : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+        var card=findViewById<CardView>(R.id.quit_card)
+        card.visibility=View.GONE
+    }
+
+    override fun onBackPressed() {
+        var card=findViewById<CardView>(R.id.quit_card)
+        card.visibility=View.VISIBLE
+    }
+
+    fun no_quit(view: View) {
+        var card=findViewById<CardView>(R.id.quit_card)
+        card.visibility=View.GONE
+    }
+    fun yes_quit(view: View) {
+        finishAffinity()
     }
 }

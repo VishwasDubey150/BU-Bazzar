@@ -1,24 +1,170 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SettingActivity">
+    tools:context=".SettingActivity"
+    android:orientation="vertical">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:backgroundTint="#EB690A"
+        android:layout_marginTop="-30dp"
+        app:cardCornerRadius="30dp">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="35dp"
+                android:src="@drawable/ic_baseline_arrow_back_ios_24"
+                android:layout_marginLeft="10dp">
+            </ImageView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Settings"
+                android:layout_marginTop="-40dp"
+                android:layout_gravity="center"
+                android:textColor="@color/white"
+                android:fontFamily="@font/poppins_bold"
+                android:textSize="50dp">
+            </TextView>
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                app:lottie_rawRes="@raw/settings"
+                app:lottie_loop="true"
+                android:layout_marginTop="-50dp"
+                app:lottie_autoPlay="true">
+        </com.airbnb.lottie.LottieAnimationView>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.cardview.widget.CardView>
+
+
+    <Button
+        android:id="@+id/edit_profile"
+        android:layout_width="60dp"
+        android:backgroundTint="#DFDFDF"
+        android:layout_height="40dp"
+        android:fontFamily="@font/poppins_bold"
+        android:onClick="updateprofile"
+        android:text="edit"
+        android:textColor="#5D5C5C"
+        android:layout_marginTop="0dp"
+        android:textAllCaps="false"
+        android:textSize="13dp"
+        android:layout_gravity="right"
+        android:layout_marginRight="20dp"/>
+
+
+
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="-20dp"
+        android:src="@drawable/profile_settings">
+    </ImageView>
+
+    <EditText
+        android:id="@+id/address"
+        android:layout_width="300dp"
+        android:layout_gravity="center"
+        android:layout_height="60dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/poppins_bold"
+        android:textSize="15dp"
+        android:paddingLeft="20dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingRight="20dp"
+        android:elevation="5dp"
+        android:hint="Address"
+        android:background="@drawable/signup_et_bg">
+    </EditText>
 
     <Button
         android:id="@+id/log_out"
-        android:onClick="logout"
-        android:layout_width="168dp"
+        android:layout_width="290dp"
         android:layout_height="70dp"
+        android:background="@drawable/btn_bg3"
         android:fontFamily="@font/poppins_bold"
+        android:onClick="logout"
         android:text="Log out"
+        android:layout_marginTop="50dp"
         android:textAllCaps="false"
         android:textSize="24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.822" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_gravity="center"/>
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/logout_card"
+            android:layout_width="300dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:foregroundGravity="center"
+            app:cardCornerRadius="30dp"
+            app:cardElevation="190dp"
+            android:layout_marginTop="-400dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="10dp"
+                    android:onClick="no_logout"
+                    android:src="@drawable/cross">
+
+                </ImageView>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="2dp"
+                    android:fontFamily="@font/poppins_bold"
+                    android:text="you wanna Logout?"
+                    android:textSize="25dp"></TextView>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn1"
+                    android:layout_width="100dp"
+                    android:layout_height="56dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="25dp"
+                    android:background="@drawable/btn_bg2"
+                    android:fontFamily="sans-serif-black"
+                    android:onClick="yes_logout"
+                    android:text="Yup"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="30dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.771" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </androidx.cardview.widget.CardView>
+</androidx.appcompat.widget.LinearLayoutCompat>
