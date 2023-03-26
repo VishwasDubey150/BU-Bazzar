@@ -11,4 +11,5 @@ class User(
     val mobile: String ="",
     val image:String="",
     val gender:String="",
-    val profileCompleted: Int=0):Parcelable
+    val address:String="",
+    var profileCompleted: Int=0):Parcelable

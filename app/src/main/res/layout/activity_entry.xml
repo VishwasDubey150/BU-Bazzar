@@ -42,7 +42,7 @@
         android:fontFamily="@font/poppins_bold">
     </TextView>
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:layout_width="300dp"
         android:layout_height="60dp"
         android:layout_gravity="center"
@@ -50,23 +50,25 @@
         android:layout_marginTop="80dp"
         android:text="Get Started"
         android:onClick="signup"
+        android:background="@drawable/btn_bg"
         android:textColor="#eb690a"
         android:textAllCaps="false"
         android:textSize="20dp"
         android:fontFamily="@font/poppins_bold">
-    </Button>
+    </androidx.appcompat.widget.AppCompatButton>
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:layout_width="300dp"
         android:layout_height="60dp"
         android:layout_gravity="center"
         android:backgroundTint="@color/white"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:text="Already have an account?"
         android:textColor="#eb690a"
+        android:background="@drawable/btn_bg"
         android:textAllCaps="false"
         android:onClick="login"
         android:textSize="16dp"
         android:fontFamily="@font/poppins_bold">
-    </Button>
+    </androidx.appcompat.widget.AppCompatButton>
 </androidx.appcompat.widget.LinearLayoutCompat>

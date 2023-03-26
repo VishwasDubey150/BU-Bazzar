@@ -14,9 +14,18 @@ object Constants {
     const val PICK_IMAGE_REQUEST_CODE = 2
     const val EXTRA_USER_DETAILS: String="extra_user_details"
     const val USERNAME="username"
+    const val MALE: String="male"
+    const val FEMALE: String="female"
     const val ADDRESS:String="address";
     const val MOBILE:String="mobile";
-    const val USER_PROFILE_IMAGE:String="User_dp";
+    const val GENDER:String="gender"
+
+    const val EMAIL:String="email";
+    const val IMAGE:String="image";
+    const val PROFILE_COMPLETED:String="profileCompleted";
+    const val USER_PROFILE_IMAGE:String="User_Profile_Image";
+
+
     fun showImageChooser(activity: Activity) {
         val galleryIntent = Intent(
             Intent.ACTION_PICK,

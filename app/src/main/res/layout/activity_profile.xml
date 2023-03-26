@@ -33,12 +33,12 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="600dp"
+        android:layout_height="700dp"
         android:layout_gravity="center"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:backgroundTint="#F8F8F8"
         app:cardElevation="50dp"
-        app:cardCornerRadius="50dp">
+        app:cardCornerRadius="100dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -51,7 +51,7 @@
                 android:layout_width="300dp"
                 android:layout_gravity="center"
                 android:layout_height="60dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="60dp"
                 android:fontFamily="@font/poppins_bold"
                 android:textSize="15dp"
                 android:paddingLeft="20dp"
@@ -81,7 +81,7 @@
                 android:background="@drawable/signup_et_bg">
             </EditText>
 
-            <EditText
+            <TextView
                 android:id="@+id/email"
                 android:layout_width="300dp"
                 android:layout_gravity="center"
@@ -95,8 +95,9 @@
                 android:paddingRight="20dp"
                 android:elevation="5dp"
                 android:hint="email"
+                android:onClick="email"
                 android:background="@drawable/signup_et_bg">
-            </EditText>
+            </TextView>
 
 
             <EditText
@@ -157,6 +158,7 @@
             </RadioGroup>
 
             <Button
+                android:id="@+id/next"
                 android:layout_width="230dp"
                 android:layout_height="60dp"
                 android:textSize="20dp"
@@ -167,7 +169,7 @@
                 android:textAllCaps="false"
                 android:padding="0dp"
                 android:text="Next"
-                android:onClick="submit"
+                android:onClick="next"
                 android:textAlignment="center">
             </Button>
         </LinearLayout>

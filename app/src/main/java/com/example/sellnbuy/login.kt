@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.ContactsContract.Profile
 import android.text.TextUtils
 import android.util.Log
 import android.view.View
@@ -14,25 +15,36 @@ import com.example.sellnbuy.firestore.firestore
 import com.example.sellnbuy.model.User
 import com.google.firebase.auth.FirebaseAuth
 
-class login : AppCompatActivity() {
+class login : baseActivity() {
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         supportActionBar?.hide()
-        val email = findViewById<EditText>(R.id.email1)
-        val password = findViewById<EditText>(R.id.password2)
-        var pb=findViewById<ProgressBar>(R.id.pbL)
-        pb.visibility= View.GONE
     }
     fun userLoggedInSuccess(user: User) {
         Log.i("Username : ",user.Username)
         Log.i("email : ",user.email)
+
+        if(user.profileCompleted==0)
+        {
+            val intent=Intent(this@login,profile::class.java)
+            intent.putExtra(Constants.EXTRA_USER_DETAILS,user)
+            startActivity(intent)
+            finish()
+            Toast.makeText(this,"please complete your profile",Toast.LENGTH_SHORT).show()
+        }
+        if (user.profileCompleted==1)
+        {
+            val intent=Intent(this@login,dashboard::class.java)
+            intent.putExtra(Constants.EXTRA_USER_DETAILS,user)
+            startActivity(intent)
+            finish()
+        }
     }
     private fun validateDetails(): Boolean {
         val email = findViewById<EditText>(R.id.email1)
         val password = findViewById<EditText>(R.id.password2)
-        var pb=findViewById<ProgressBar>(R.id.pbL)
 
         return when {
 
@@ -55,12 +67,10 @@ class login : AppCompatActivity() {
     {
         val email = findViewById<EditText>(R.id.email1)
         val password = findViewById<EditText>(R.id.password2)
-        var pb=findViewById<ProgressBar>(R.id.pbL)
 
         if(validateDetails())
         {
-
-            pb.visibility= View.VISIBLE
+            showPB()
             val emailL=email.text.toString().trim{it <=' '}
             val passwordL=password.text.toString().trim{it <=' '}
 
@@ -68,13 +78,12 @@ class login : AppCompatActivity() {
                 .addOnCompleteListener {task ->
                         if(task.isSuccessful)
                         {
+                            hidePB()
                             firestore().getUserDetails(this)
-                            pb.visibility= View.GONE
-                            godirectprofile(User())
                         }
                         else
                         {
-                            pb.visibility= View.GONE
+                            hidePB()
                             Toast.makeText(this@login,task.exception!!.message.toString(),Toast.LENGTH_LONG).show()
 
                         }

@@ -27,10 +27,8 @@ class sign_up : baseActivity() {
         val email=findViewById<EditText>(id.email2)
         val password=findViewById<EditText>(id.password3)
         val signbtn=findViewById<Button>(id.signbtn)
-        val pb=findViewById<ProgressBar>(R.id.pb)
         val checkbox=findViewById<CheckBox>(R.id.checkbox)
         supportActionBar?.hide()
-        pb.visibility= View.GONE
         signbtn.setOnClickListener {
             when{
                 TextUtils.isEmpty(email.text.toString().trim{it<=' '})->{
@@ -58,7 +56,7 @@ class sign_up : baseActivity() {
                 else  ->{
                     val emailO: String=email.text.toString().trim(){it <=' '}
                     val passwordO: String=password.text.toString().trim(){it <=' '}
-                    pb.visibility= View.VISIBLE
+                    showPB()
                     FirebaseAuth.getInstance().createUserWithEmailAndPassword(emailO,passwordO)
                         .addOnCompleteListener (
                                 OnCompleteListener<AuthResult>{
@@ -66,16 +64,14 @@ class sign_up : baseActivity() {
                                     if(task.isSuccessful)
                                     {
                                         val firebaseUser:FirebaseUser=task.result!!.user!!
-
                                         val user= User(
                                             firebaseUser.uid,
-                                            username.text.toString(),
+                                            username.text.toString().trim{it <=' '},
                                             email.text.toString().trim{it <=' '},
                                             contact.text.toString().trim(){it<=' '}
                                         )
                                         firestore().registerUser(this,user)
-                                        pb.visibility= View.GONE
-                                        Toast.makeText(this@sign_up,"Your account is created",Toast.LENGTH_SHORT).show()
+                                        hidePB()
 
                                         val intent=Intent(this@sign_up,login::class.java)
                                         intent.flags=Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
@@ -87,7 +83,7 @@ class sign_up : baseActivity() {
                                     }
                                     else
                                     {
-                                        pb.visibility= View.GONE
+                                        hidePB()
                                         Toast.makeText(this@sign_up,task.exception!!.message.toString(),Toast.LENGTH_LONG).show()
                                     }
                                 })
@@ -106,5 +102,12 @@ class sign_up : baseActivity() {
         val intent = Intent(this, Entry::class.java)
         startActivity(intent)
     }
+
+    fun userRegistrationSuccess()
+    {
+        hidePB()
+        Toast.makeText(this,"Account created successfully",Toast.LENGTH_SHORT).show()
+    }
+
 }
 
