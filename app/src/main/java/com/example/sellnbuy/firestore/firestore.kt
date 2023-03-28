@@ -69,10 +69,22 @@ class firestore:baseActivity() {
                     is login -> {
                         activity.userLoggedInSuccess(user)
                     }
+                    is SettingActivity -> {
+                        activity.userDetailsSuccess(user)
+                    }
                 }
 
             }
             .addOnFailureListener { e ->
+
+                when (activity) {
+                    is login -> {
+                        activity.hidePB()
+                    }
+                    is SettingActivity -> {
+                        activity.hidePB()
+                    }
+                }
             }
     }
     fun updateUserProfileData(activity: Activity, userHashMap: HashMap<String, Any>) {
@@ -86,6 +98,10 @@ class firestore:baseActivity() {
                 when (activity) {
                     is profile -> {
                         activity.userProfileUpdateSuccess()
+                    }
+
+                    is SettingActivity ->{
+
                     }
                 }
             }

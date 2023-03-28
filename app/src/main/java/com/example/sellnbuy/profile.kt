@@ -3,6 +3,7 @@ package com.example.sellnbuy
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -36,8 +37,8 @@ class profile : baseActivity() {
 
     @SuppressLint("RestrictedApi")
     companion object {
-        private const val READ_STORAGE_PERMISSION_CODE = 1
-        private const val PICK_IMAGE_REQUEST_CODE = 2
+        const val READ_STORAGE_PERMISSION_CODE = 1
+        const val PICK_IMAGE_REQUEST_CODE = 2
     }
 
     private var mselectedImageFileUri: Uri? = null
@@ -48,6 +49,11 @@ class profile : baseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
         supportActionBar?.hide()
+        val sharedPreferences=getSharedPreferences(Constants.Sellnbuy_pref,Context.MODE_PRIVATE)
+        val un=sharedPreferences.getString(Constants.Loggedin_un,"")!!
+        var name1 = findViewById<EditText>(R.id.name)
+        name1.setText(un)
+
 
 
         val iv_profile_user_image = findViewById<ImageView>(R.id.img)
@@ -191,6 +197,8 @@ class profile : baseActivity() {
 
         val mobileNumber = contact.text.toString().trim { it <= ' ' }
         val address = addresss.text.toString().trim { it <= ' ' }
+
+        val name1 = name.text.toString().trim { it <= ' ' }
 
 
         val gender = if (male.isChecked) {

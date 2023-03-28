@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddProductActivity"
+    android:background="#ffff"
+    android:orientation="vertical">
+
+
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="250dp"
+        android:orientation="vertical"
+        android:layout_gravity="center">
+        
+        <ImageView
+            android:id="@+id/add_img"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/qm">
+        </ImageView>
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="right"
+        android:src="@drawable/edit"
+        android:layout_marginTop="-10dp"
+        android:layout_marginRight="30dp"
+        android:onClick="upload_image">
+    </ImageView>
+
+    <EditText
+        android:id="@+id/product_title"
+        android:inputType="textPersonName"
+        android:layout_width="300dp"
+        android:layout_height="70dp"
+        android:layout_gravity="center"
+        android:hint="Product Title"
+        android:fontFamily="@font/poppins_bold"
+        android:textSize="25dp"
+        android:paddingLeft="20dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingRight="20dp"
+        android:elevation="5dp"
+        android:background="@drawable/signup_et_bg">
+    </EditText>
+
+    <EditText
+        android:id="@+id/Product_description"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:hint="Product description"
+        android:fontFamily="@font/poppins_bold"
+        android:textSize="15dp"
+        android:paddingLeft="20dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingRight="20dp"
+        android:elevation="5dp"
+        android:background="@drawable/signup_et_bg">
+    </EditText>
+
+
+    <EditText
+        android:id="@+id/product_price"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:hint="Price(₹)"
+        android:fontFamily="@font/poppins_bold"
+        android:textSize="15dp"
+        android:inputType="number"
+        android:paddingLeft="20dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingRight="20dp"
+        android:elevation="5dp"
+        android:background="@drawable/signup_et_bg">
+    </EditText>
+
+    <EditText
+        android:id="@+id/product_Quantity"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:hint="Quantity"
+        android:fontFamily="@font/poppins_bold"
+        android:textSize="15dp"
+        android:inputType="number"
+        android:paddingLeft="20dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingRight="20dp"
+        android:elevation="5dp"
+        android:background="@drawable/signup_et_bg">
+    </EditText>
+
+
+    <Button
+        android:id="@+id/signbtn"
+        android:layout_width="200dp"
+        android:layout_height="70dp"
+        android:layout_gravity="center"
+        android:text="Submit"
+        android:layout_marginTop="80dp"
+        android:textAllCaps="false"
+        android:onClick=""
+        android:textSize="25dp"
+        android:background="@drawable/btn_bg"
+        android:fontFamily="@font/poppins_bold">
+    </Button>
+</androidx.appcompat.widget.LinearLayoutCompat>
