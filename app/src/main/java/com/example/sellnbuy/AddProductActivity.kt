@@ -23,8 +23,8 @@ import java.io.IOException
 import java.net.URL
 
 class AddProductActivity : baseActivity() {
-    val mSelectedImageFileURI: Uri? =null
-    var mProductImageURL: String=""
+    var mSelectedImageFileURI: Uri? =null
+    var mUserProductImageURL: String=""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.add_product)
@@ -73,10 +73,10 @@ public override fun onActivityResult(requestCode: Int, resultCode: Int, data: In
         if (requestCode == profile.PICK_IMAGE_REQUEST_CODE) {
             if (data != null) {
                 try {
-                    var mselectedImageFileUri = data.data!!
+                    mSelectedImageFileURI = data.data!!
                     Glide
                         .with(this)
-                        .load(mselectedImageFileUri)
+                        .load(mSelectedImageFileURI)
                         .centerCrop()
                         .placeholder(R.drawable.add)
                         .into(iv_profile_user_image)
@@ -149,8 +149,9 @@ fun showImageChooser(activity: Activity) {
 
     fun imageUploadSuccess(imageURL: String)
     {
+        hidePB()
         Toast.makeText(this,"Product image is Uploaded Successfully",Toast.LENGTH_SHORT).show()
-        mProductImageURL=imageURL
+        mUserProductImageURL=imageURL
         uploadProductDetails()
     }
 
@@ -171,7 +172,7 @@ fun showImageChooser(activity: Activity) {
             price.text.toString().trim{ it <=' '},
             description.text.toString().trim{ it <=' '},
             quantity.text.toString().trim{ it <=' '},
-            mProductImageURL
+            mUserProductImageURL
         )
         firestore().uploadProductDetails(this,product)
     }
@@ -181,6 +182,5 @@ fun showImageChooser(activity: Activity) {
         hidePB()
         Toast.makeText(this@AddProductActivity,"product is added",Toast.LENGTH_SHORT).show()
         finish()
-
     }
 }

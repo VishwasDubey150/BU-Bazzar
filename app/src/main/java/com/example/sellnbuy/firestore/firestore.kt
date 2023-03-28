@@ -126,7 +126,7 @@ class firestore:baseActivity() {
 
             //getting the storage reference
             val sRef: StorageReference = FirebaseStorage.getInstance().reference.child(
-                Constants.USER_PROFILE_IMAGE + System.currentTimeMillis() + "."
+                imageType + System.currentTimeMillis() + "."
                         + Constants.getFileExtension(
                     activity,
                     imageFileURI
