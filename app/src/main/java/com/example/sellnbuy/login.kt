@@ -36,7 +36,7 @@ class login : baseActivity() {
         }
         if (user.profileCompleted==1)
         {
-            val intent=Intent(this@login,dashboard::class.java)
+            val intent=Intent(this@login,profile::class.java)
             intent.putExtra(Constants.EXTRA_USER_DETAILS,user)
             startActivity(intent)
             finish()

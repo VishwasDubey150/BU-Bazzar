@@ -51,10 +51,6 @@ class profile : baseActivity() {
         supportActionBar?.hide()
         val sharedPreferences=getSharedPreferences(Constants.Sellnbuy_pref,Context.MODE_PRIVATE)
         val un=sharedPreferences.getString(Constants.Loggedin_un,"")!!
-        var name1 = findViewById<EditText>(R.id.name)
-        name1.setText(un)
-
-
 
         val iv_profile_user_image = findViewById<ImageView>(R.id.img)
         iv_profile_user_image.setOnClickListener {
@@ -172,7 +168,7 @@ class profile : baseActivity() {
             showPB()
             if(mselectedImageFileUri != null)
             {
-                firestore().uploadImageToCloudStorage(this,mselectedImageFileUri)
+                firestore().uploadImageToCloudStorage(this,mselectedImageFileUri,Constants.USER_PROFILE_IMAGE)
             }
             else
             {
@@ -199,6 +195,11 @@ class profile : baseActivity() {
         val address = addresss.text.toString().trim { it <= ' ' }
 
         val name1 = name.text.toString().trim { it <= ' ' }
+
+        if(name1.isNotEmpty()) {
+            userHashMap[Constants.Loggedin_un] =name1
+        }
+
 
 
         val gender = if (male.isChecked) {

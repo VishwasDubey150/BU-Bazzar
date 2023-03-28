@@ -8,6 +8,7 @@ import android.webkit.MimeTypeMap
 
 object Constants {
     const val USERS:String="users"
+    const val PRODUCTS : String="products"
     const val Sellnbuy_pref:String="Sellnbuy_prefs"
     const val Loggedin_un:String="loggedin_un"
     const val READ_STORAGE_PERMISSION_CODE = 2
@@ -19,7 +20,7 @@ object Constants {
     const val ADDRESS:String="address";
     const val MOBILE:String="mobile";
     const val GENDER:String="gender"
-
+    const val PRODUCT_IMAGE="Product_Image"
     const val EMAIL:String="email";
     const val IMAGE:String="image";
     const val PROFILE_COMPLETED:String="profileCompleted";

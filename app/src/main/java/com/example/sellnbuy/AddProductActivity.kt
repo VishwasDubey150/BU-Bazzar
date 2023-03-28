@@ -2,23 +2,29 @@ package com.example.sellnbuy
 
 import android.Manifest
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
+import android.text.TextUtils
 import android.view.View
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
+import com.example.sellnbuy.Constants.PRODUCT_IMAGE
 import com.example.sellnbuy.R
+import com.example.sellnbuy.firestore.firestore
+import com.example.sellnbuy.model.Product
 import java.io.IOException
+import java.net.URL
 
-class AddProductActivity : AppCompatActivity() {
+class AddProductActivity : baseActivity() {
+    val mSelectedImageFileURI: Uri? =null
+    var mProductImageURL: String=""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.add_product)
@@ -38,6 +44,8 @@ class AddProductActivity : AppCompatActivity() {
                 profile.READ_STORAGE_PERMISSION_CODE)
         }
     }
+
+
 
 override fun onRequestPermissionsResult(
     requestCode: Int,
@@ -90,5 +98,89 @@ fun showImageChooser(activity: Activity) {
     startActivityForResult(galleryIntent, profile.PICK_IMAGE_REQUEST_CODE)
 }
 
-    fun submit(view: View) {}
+    fun submit(view: View) {
+
+            if (validateDetails())
+            {
+                showPB()
+
+                if (mSelectedImageFileURI != null)
+                {
+                    firestore().uploadImageToCloudStorage(this,mSelectedImageFileURI,Constants.PRODUCT_IMAGE)
+                }
+            }
+        Toast.makeText(this, "Please complete the profile", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun validateDetails(): Boolean {
+        var title=findViewById<EditText>(R.id.product_title)
+        var description=findViewById<EditText>(R.id.product_title)
+        var price=findViewById<EditText>(R.id.product_title)
+        var quantity=findViewById<EditText>(R.id.product_title)
+
+
+        return when {
+
+            TextUtils.isEmpty(title.text.toString().trim { it <= ' ' }) -> {
+                Toast.makeText(this, "Please complete the profile", Toast.LENGTH_SHORT).show()
+                false
+            }
+            TextUtils.isEmpty(description.text.toString().trim { it <= ' ' }) -> {
+                Toast.makeText(this, "Please complete the profile", Toast.LENGTH_SHORT).show()
+                false
+            }
+            TextUtils.isEmpty(price.text.toString().trim { it <= ' ' }) -> {
+                Toast.makeText(this, "Please complete the profile", Toast.LENGTH_SHORT).show()
+                false
+            }
+            TextUtils.isEmpty(quantity.text.toString().trim { it <= ' ' }) -> {
+                Toast.makeText(this, "Please complete the profile", Toast.LENGTH_SHORT).show()
+                false
+
+            }
+
+            else -> {
+                true
+            }
+        }
+    }
+
+
+
+    fun imageUploadSuccess(imageURL: String)
+    {
+        Toast.makeText(this,"Product image is Uploaded Successfully",Toast.LENGTH_SHORT).show()
+        mProductImageURL=imageURL
+        uploadProductDetails()
+    }
+
+    private fun uploadProductDetails()
+    {
+        var title=findViewById<EditText>(R.id.product_title)
+        var description=findViewById<EditText>(R.id.product_title)
+        var price=findViewById<EditText>(R.id.product_title)
+        var quantity=findViewById<EditText>(R.id.product_title)
+
+        val username=this.getSharedPreferences(Constants.Sellnbuy_pref,Context.MODE_PRIVATE)
+            .getString(Constants.Loggedin_un,"")!!
+
+        val product=Product(
+            firestore().getCurrentUserID(),
+            username,
+            title.text.toString().trim{ it <= ' '},
+            price.text.toString().trim{ it <=' '},
+            description.text.toString().trim{ it <=' '},
+            quantity.text.toString().trim{ it <=' '},
+            mProductImageURL
+        )
+        firestore().uploadProductDetails(this,product)
+    }
+
+    fun productUploadSuccess()
+    {
+        hidePB()
+        Toast.makeText(this@AddProductActivity,"product is added",Toast.LENGTH_SHORT).show()
+        finish()
+
+    }
 }

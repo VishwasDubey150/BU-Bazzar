@@ -6,7 +6,9 @@ import android.content.SharedPreferences
 import android.net.Uri
 import android.util.Log
 import android.widget.Toast
+import com.bumptech.glide.load.ImageHeaderParser.ImageType
 import com.example.sellnbuy.*
+import com.example.sellnbuy.model.Product
 import com.example.sellnbuy.model.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -120,7 +122,7 @@ class firestore:baseActivity() {
                 )
             }
     }
-    fun uploadImageToCloudStorage(activity: Activity, imageFileURI: Uri?) {
+    fun uploadImageToCloudStorage(activity: Activity, imageFileURI: Uri?, imageType: String) {
 
             //getting the storage reference
             val sRef: StorageReference = FirebaseStorage.getInstance().reference.child(
@@ -150,6 +152,11 @@ class firestore:baseActivity() {
                                 is profile -> {
                                     activity.imageUploadSuccess(uri.toString())
                                 }
+
+                                is AddProductActivity->{
+                                    activity.imageUploadSuccess(uri.toString())
+
+                                }
                             }
                         }
                 }
@@ -160,7 +167,12 @@ class firestore:baseActivity() {
                         is profile -> {
                             activity.hidePB()
                         }
+                        is AddProductActivity ->{
+                            hidePB()
+                        }
                     }
+
+
 
                     Log.e(
                         activity.javaClass.simpleName,
@@ -169,7 +181,26 @@ class firestore:baseActivity() {
                     )
                 }
         }
+
+    fun uploadProductDetails(activity: AddProductActivity,productInfo: Product)
+    {
+        mfirestore.collection(Constants.PRODUCTS)
+            .document()
+            .set(productInfo, SetOptions.merge())
+            .addOnSuccessListener {
+                activity.productUploadSuccess()
+            }
+            .addOnFailureListener {
+                e ->
+                activity.hidePB()
+
+                Log.e(
+                    activity.javaClass.simpleName,
+                    "Error while updating the user details.", e
+                )
+            }
     }
+}
 
 
 
