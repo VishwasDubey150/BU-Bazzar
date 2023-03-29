@@ -19,6 +19,8 @@ import com.example.sellnbuy.Constants.PRODUCT_IMAGE
 import com.example.sellnbuy.R
 import com.example.sellnbuy.firestore.firestore
 import com.example.sellnbuy.model.Product
+import com.example.sellnbuy.model.User
+import kotlinx.android.synthetic.main.activity_profile.*
 import java.io.IOException
 import java.net.URL
 
@@ -152,10 +154,10 @@ fun showImageChooser(activity: Activity) {
         hidePB()
         Toast.makeText(this,"Product image is Uploaded Successfully",Toast.LENGTH_SHORT).show()
         mUserProductImageURL=imageURL
-        uploadProductDetails()
+        uploadProductDetails(User())
     }
 
-    private fun uploadProductDetails()
+    private fun uploadProductDetails(user: User)
     {
         var title=findViewById<EditText>(R.id.product_title)
         var description=findViewById<EditText>(R.id.product_title)
@@ -167,12 +169,11 @@ fun showImageChooser(activity: Activity) {
 
         val product=Product(
             firestore().getCurrentUserID(),
-            username,
             title.text.toString().trim{ it <= ' '},
             price.text.toString().trim{ it <=' '},
             description.text.toString().trim{ it <=' '},
             quantity.text.toString().trim{ it <=' '},
-            mUserProductImageURL
+
         )
         firestore().uploadProductDetails(this,product)
     }

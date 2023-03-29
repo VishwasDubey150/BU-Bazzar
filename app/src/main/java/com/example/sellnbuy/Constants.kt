@@ -23,6 +23,7 @@ object Constants {
     const val PRODUCT_IMAGE="Product_Image"
     const val EMAIL:String="email";
     const val IMAGE:String="image";
+    const val USER_ID:String="user_id";
     const val PROFILE_COMPLETED:String="profileCompleted";
     const val USER_PROFILE_IMAGE:String="User_Profile_Image";
 

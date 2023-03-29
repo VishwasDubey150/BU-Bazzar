@@ -6,13 +6,16 @@ import android.content.SharedPreferences
 import android.net.Uri
 import android.util.Log
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.bumptech.glide.load.ImageHeaderParser.ImageType
 import com.example.sellnbuy.*
 import com.example.sellnbuy.model.Product
 import com.example.sellnbuy.model.User
+import com.example.sellnbuy.ui.product.ProductFragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
+import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 
@@ -199,6 +202,29 @@ class firestore:baseActivity() {
                     "Error while updating the user details.", e
                 )
             }
+    }
+
+    fun getProductsList(fragment: Fragment)
+    {
+        mfirestore.collection(Constants.PRODUCTS)
+            .whereEqualTo(Constants.USER_ID,getCurrentUserID())
+            .get()
+            .addOnSuccessListener { document ->
+                Log.e("Products List",document.documents.toString())
+                val productList: ArrayList<Product> =ArrayList()
+                for (i in document.documents)
+                {
+                    val product=i.toObject(Product::class.java)
+                    product!!.product_id=i.id
+                    productList.add(product)
+            }
+                when(fragment)
+                {
+                    is ProductFragment ->{
+                        fragment.successProductsListFromFireStore(productList)
+                    }
+                }
+        }
     }
 }
 

@@ -2,14 +2,18 @@ package com.example.sellnbuy.ui.product
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.sellnbuy.AddProductActivity
 import com.example.sellnbuy.R
+import com.example.sellnbuy.baseFragment
 import com.example.sellnbuy.databinding.FragmentProductBinding
+import com.example.sellnbuy.firestore.firestore
+import com.example.sellnbuy.model.Product
 
-class ProductFragment : Fragment() {
+class ProductFragment : baseFragment() {
 
     private var _binding: FragmentProductBinding? = null
     private val binding get() = _binding!!
@@ -18,6 +22,29 @@ class ProductFragment : Fragment() {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
     }
+
+    fun  successProductsListFromFireStore(productsList: ArrayList<Product>)
+    {
+        hidePB()
+
+        for(i in productsList)
+        {
+            Log.i("Product Name",i.title)
+        }
+    }
+
+    private fun getProductListFromFireStore()
+    {
+        showPB()
+        firestore().getProductsList(this)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        getProductListFromFireStore()
+    }
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,8 +57,7 @@ class ProductFragment : Fragment() {
         val root: View = binding.root
 
         val textView: TextView = binding.textHome
-        //homeViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = "It is home fragent"
+
 
         return root
     }

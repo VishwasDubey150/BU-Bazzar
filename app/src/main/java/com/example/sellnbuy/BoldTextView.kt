@@ -17,4 +17,6 @@ class BoldTextView(context: Context,attributeSet: AttributeSet):AppCompatTextVie
             Typeface.createFromAsset(context.assets,"Montserrat-Bold.ttf")
         typeface=boldTypeface
     }
+
+
 }
