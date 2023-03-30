@@ -161,7 +161,7 @@ fun showImageChooser(activity: Activity) {
     {
         var title=findViewById<EditText>(R.id.product_title)
         var description=findViewById<EditText>(R.id.product_title)
-        var price=findViewById<EditText>(R.id.product_title)
+        var price=findViewById<EditText>(R.id.product_price)
         var quantity=findViewById<EditText>(R.id.product_title)
 
         val username=this.getSharedPreferences(Constants.Sellnbuy_pref,Context.MODE_PRIVATE)
@@ -169,11 +169,12 @@ fun showImageChooser(activity: Activity) {
 
         val product=Product(
             firestore().getCurrentUserID(),
+            username,
             title.text.toString().trim{ it <= ' '},
             price.text.toString().trim{ it <=' '},
             description.text.toString().trim{ it <=' '},
             quantity.text.toString().trim{ it <=' '},
-
+            mUserProductImageURL
         )
         firestore().uploadProductDetails(this,product)
     }

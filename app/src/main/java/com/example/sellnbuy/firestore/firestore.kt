@@ -11,6 +11,7 @@ import com.bumptech.glide.load.ImageHeaderParser.ImageType
 import com.example.sellnbuy.*
 import com.example.sellnbuy.model.Product
 import com.example.sellnbuy.model.User
+import com.example.sellnbuy.ui.dashboard.DashboardFragment
 import com.example.sellnbuy.ui.product.ProductFragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -226,6 +227,56 @@ class firestore:baseActivity() {
                 }
         }
     }
+
+    fun getDashboardItemsList(fragment: DashboardFragment)
+    {
+        mfirestore.collection(Constants.PRODUCTS)
+            .get()
+            .addOnSuccessListener { docunment ->
+                Log.e(fragment.javaClass.simpleName,docunment.documents.toString())
+                val productsList : ArrayList<Product> = ArrayList()
+
+                for(i in docunment.documents)
+                {
+                    val product=i.toObject(Product::class.java)!!
+                    product.product_id=i.id
+                    productsList.add(product)
+                }
+
+                fragment.successDashboardItemsList(productsList)
+            }
+
+            .addOnFailureListener {
+                e ->
+                fragment.hidePB()
+                Log.e(fragment.javaClass.simpleName,"Error while fectching",e)
+
+
+            }
+    }
+
+    fun deleteProduct(fragment: ProductFragment, productId: String) {
+
+        mfirestore.collection(Constants.PRODUCTS)
+            .document(productId)
+            .delete()
+            .addOnSuccessListener {
+
+                fragment.productDeleteSuccess()
+
+            }
+            .addOnFailureListener { e->
+
+                fragment.hidePB()
+
+                Log.e(
+                    fragment.requireActivity().javaClass.simpleName,
+                    "Error while deleting the product.",
+                    e
+                )
+            }
+    }
+
 }
 
 

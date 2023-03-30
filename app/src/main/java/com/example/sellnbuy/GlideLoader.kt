@@ -20,4 +20,16 @@ import java.io.IOException
                 e.printStackTrace()
             }
         }
+
+        fun loadProductPicture(image: Any, imageView: ImageView) {
+            try {
+                Glide
+                    .with(context)
+                    .load(image) // URI of the image
+                    .centerCrop() // Scale type of the image.// A default place holder if image is failed to load.
+                    .into(imageView) // the view in which the image will be loaded.
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+        }
     }
