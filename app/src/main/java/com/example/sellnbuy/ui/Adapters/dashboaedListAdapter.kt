@@ -37,7 +37,7 @@ open class dashboaedListAdapter (
                 holder.itemView.dimage
             )
             holder.itemView.dname.text = model.title
-            holder.itemView.dprice.text = "$${model.price}"
+            holder.itemView.dprice.text = "₹${model.price}"
         }
     }
 

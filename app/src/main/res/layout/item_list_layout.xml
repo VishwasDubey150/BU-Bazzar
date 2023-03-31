@@ -34,10 +34,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="30dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="30dp"
                     android:fontFamily="@font/poppins_bold"
                     android:text="Name"
-                    android:textSize="30dp"></TextView>
+                    android:textSize="20dp"></TextView>
 
                 <TextView
                     android:id="@+id/item_price"
@@ -46,7 +46,7 @@
                     android:layout_marginLeft="30dp"
                     android:fontFamily="@font/poppins_bold"
                     android:text="30"
-                    android:textSize="20dp"></TextView>
+                    android:textSize="15dp"></TextView>
             </androidx.appcompat.widget.LinearLayoutCompat>
 
             <ImageView

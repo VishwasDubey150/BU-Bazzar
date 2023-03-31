@@ -1,12 +1,16 @@
 package com.example.sellnbuy.ui.Adapters
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.sellnbuy.Constants
 import com.example.sellnbuy.GlideLoader
+import com.example.sellnbuy.ProductDetails
 import com.example.sellnbuy.R
+import com.example.sellnbuy.databinding.ActivityProductDetailsBinding
 import com.example.sellnbuy.model.Product
 import com.example.sellnbuy.ui.product.ProductFragment
 import kotlinx.android.synthetic.main.activity_main.view.*
@@ -37,6 +41,12 @@ open class MyProductListAdapters(
 
             holder.itemView.delete.setOnClickListener {
                 fragment.deleteProduct(model.product_id)
+            }
+
+            holder.itemView.setOnClickListener {
+                val intent=Intent(context,ProductDetails::class.java)
+                intent.putExtra(Constants.EXTRA_PROODUCT_ID,model.product_id)
+                context.startActivity(intent)
             }
         }
 

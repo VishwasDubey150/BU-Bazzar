@@ -116,9 +116,9 @@ fun showImageChooser(activity: Activity) {
 
     private fun validateDetails(): Boolean {
         var title=findViewById<EditText>(R.id.product_title)
-        var description=findViewById<EditText>(R.id.product_title)
-        var price=findViewById<EditText>(R.id.product_title)
-        var quantity=findViewById<EditText>(R.id.product_title)
+        var description=findViewById<EditText>(R.id.Product_description)
+        var price=findViewById<EditText>(R.id.product_price)
+        var quantity=findViewById<EditText>(R.id.product_Quantity)
 
 
         return when {
@@ -160,9 +160,9 @@ fun showImageChooser(activity: Activity) {
     private fun uploadProductDetails(user: User)
     {
         var title=findViewById<EditText>(R.id.product_title)
-        var description=findViewById<EditText>(R.id.product_title)
+        var description=findViewById<EditText>(R.id.Product_description)
         var price=findViewById<EditText>(R.id.product_price)
-        var quantity=findViewById<EditText>(R.id.product_title)
+        var quantity=findViewById<EditText>(R.id.product_Quantity)
 
         val username=this.getSharedPreferences(Constants.Sellnbuy_pref,Context.MODE_PRIVATE)
             .getString(Constants.Loggedin_un,"")!!
