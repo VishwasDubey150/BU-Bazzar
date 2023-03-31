@@ -1,6 +1,5 @@
 package com.example.sellnbuy
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -25,13 +24,11 @@ class ProductDetails : baseActivity() {
     }
 
         private fun getProductDetails() {
-
             showPB()
             firestore().getProductDetails(this@ProductDetails, mProductId)
         }
 
         fun productDetailsSuccess(product: Product) {
-
             hidePB()
             GlideLoader(this@ProductDetails).loadProductPicture(product.p_image,pro_img)
 
@@ -40,4 +37,5 @@ class ProductDetails : baseActivity() {
             pro_description.text = product.description
             pro_stock_left.text = "only ${product.stock_quantity} left!!"
         }
-    }
+
+}

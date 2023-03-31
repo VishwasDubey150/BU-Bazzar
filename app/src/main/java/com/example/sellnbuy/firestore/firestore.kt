@@ -7,8 +7,8 @@ import android.net.Uri
 import android.util.Log
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.bumptech.glide.load.ImageHeaderParser.ImageType
 import com.example.sellnbuy.*
+import com.example.sellnbuy.model.CartItem
 import com.example.sellnbuy.model.Product
 import com.example.sellnbuy.model.User
 import com.example.sellnbuy.ui.dashboard.DashboardFragment
@@ -16,7 +16,6 @@ import com.example.sellnbuy.ui.product.ProductFragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
-import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 
@@ -299,6 +298,77 @@ class firestore:baseActivity() {
                 activity.hidePB()
 
                 Log.e(activity.javaClass.simpleName, "Error while getting the product details.", e)
+            }
+    }
+
+
+    fun getdashbordDetails(activity: dashboard_details, productId: String) {
+
+        // The collection name for PRODUCTS
+        mfirestore.collection(Constants.PRODUCTS)
+            .document(productId)
+            .get() // Will get the document snapshots.
+            .addOnSuccessListener { document ->
+
+                Log.e(activity.javaClass.simpleName, document.toString())
+
+                // Convert the snapshot to the object of Product data model class.
+                val product = document.toObject(Product::class.java)!!
+
+                activity.dashDetailsSuccess(product)
+                // END
+            }
+            .addOnFailureListener { e ->
+
+                // Hide the progress dialog if there is an error.
+                activity.hidePB()
+
+                Log.e(activity.javaClass.simpleName, "Error while getting the product details.", e)
+            }
+    }
+
+    fun addCartItems(activity: dashboard_details, addToCart:CartItem) {
+        mfirestore.collection(Constants.CART_ITEMS)
+            .document()
+            .set(addToCart, SetOptions.merge())
+            .addOnSuccessListener {
+                activity.addtoCartSuccess()
+            }
+            .addOnFailureListener { e ->
+                activity.hidePB()
+                Log.e(activity.javaClass.simpleName, "Error while registering the user.", e)
+            }
+    }
+
+    fun checkIfItemExistInCart(activity: dashboard_details, productId: String) {
+
+        mfirestore.collection(Constants.CART_ITEMS)
+            .whereEqualTo(Constants.USER_ID, getCurrentUserID())
+            .whereEqualTo(Constants.PRODUCT_ID, productId)
+            .get()
+            .addOnSuccessListener { document ->
+
+                Log.e(activity.javaClass.simpleName, document.documents.toString())
+
+                // TODO Step 8: Notify the success result to the base class.
+                // START
+                // If the document size is greater than 1 it means the product is already added to the cart.
+                if (document.documents.size > 0) {
+                    activity.productExistsInCart()
+                } else {
+                    activity.hidePB()
+                }
+                // END
+            }
+            .addOnFailureListener { e ->
+                // Hide the progress dialog if there is an error.
+                activity.hidePB()
+
+                Log.e(
+                    activity.javaClass.simpleName,
+                    "Error while checking the existing cart list.",
+                    e
+                )
             }
     }
 

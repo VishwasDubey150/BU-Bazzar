@@ -1,9 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".dashboard_details">
+    tools:context=".ProductDetails"
+    android:orientation="vertical">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ImageView
+        android:id="@+id/dash_img"
+        android:layout_width="match_parent"
+        android:layout_height="250dp">
+    </ImageView>
+
+    <TextView
+        android:id="@+id/dash_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:text="Product name"
+        android:textSize="40dp"
+        android:fontFamily="@font/poppins_bold">
+    </TextView>
+
+    <TextView
+        android:id="@+id/dash_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:text="Description"
+        android:textSize="20dp"
+        android:fontFamily="@font/poppins_bold">
+    </TextView>
+
+    <TextView
+        android:id="@+id/dash_stock_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:text="Stock Left"
+        android:textSize="20dp"
+        android:fontFamily="@font/poppins_bold">
+    </TextView>
+
+    <TextView
+        android:id="@+id/dash_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:textColor="#10770D"
+        android:text="price"
+        android:textSize="30dp"
+        android:fontFamily="@font/poppins_bold">
+    </TextView>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/add_to_cart"
+        android:layout_width="250dp"
+        android:layout_height="70dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/btn_bg2"
+        android:fontFamily="sans-serif-black"
+        android:text="Add to cart"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:onClick="addtocart"
+        android:textSize="30dp" />
+
+    <TextView
+        android:id="@+id/added"
+        android:layout_width="250dp"
+        android:layout_height="70dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/btn_bg"
+        android:fontFamily="sans-serif-black"
+        android:text="Added to Cart"
+        android:visibility="gone"
+        android:textAllCaps="false"
+        android:gravity="center"
+        android:textColor="@color/purple_500"
+        android:textSize="30dp" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/go_to_cart"
+        android:layout_width="250dp"
+        android:layout_height="70dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/btn_bg2"
+        android:fontFamily="sans-serif-black"
+        android:text="Go to cart"
+        android:visibility="gone"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:onClick="gotocart"
+        android:textSize="30dp" />
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>

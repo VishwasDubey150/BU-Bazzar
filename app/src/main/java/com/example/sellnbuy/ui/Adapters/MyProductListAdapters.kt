@@ -6,10 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.sellnbuy.Constants
-import com.example.sellnbuy.GlideLoader
-import com.example.sellnbuy.ProductDetails
-import com.example.sellnbuy.R
+import com.example.sellnbuy.*
 import com.example.sellnbuy.databinding.ActivityProductDetailsBinding
 import com.example.sellnbuy.model.Product
 import com.example.sellnbuy.ui.product.ProductFragment
@@ -43,9 +40,11 @@ open class MyProductListAdapters(
                 fragment.deleteProduct(model.product_id)
             }
 
+
             holder.itemView.setOnClickListener {
                 val intent=Intent(context,ProductDetails::class.java)
                 intent.putExtra(Constants.EXTRA_PROODUCT_ID,model.product_id)
+                intent.putExtra(Constants.EXTRA_PRODUCT_OWNER_ID,model.user_id)
                 context.startActivity(intent)
             }
         }
@@ -55,6 +54,5 @@ open class MyProductListAdapters(
     override fun getItemCount(): Int {
         return list.size
     }
-
     class MyViewHolder(view: View):RecyclerView.ViewHolder(view)
 }

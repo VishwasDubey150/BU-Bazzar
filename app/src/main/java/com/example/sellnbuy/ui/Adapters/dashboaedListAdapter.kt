@@ -2,12 +2,12 @@ package com.example.sellnbuy.ui.Adapters
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.sellnbuy.GlideLoader
-import com.example.sellnbuy.R
+import com.example.sellnbuy.*
 import com.example.sellnbuy.model.Product
 import kotlinx.android.synthetic.main.item_dashboard_layout.view.*
 
@@ -38,6 +38,13 @@ open class dashboaedListAdapter (
             )
             holder.itemView.dname.text = model.title
             holder.itemView.dprice.text = "₹${model.price}"
+
+            holder.itemView.setOnClickListener {
+                val intent= Intent(context, dashboard_details::class.java)
+                intent.putExtra(Constants.EXTRA_DASH_ID,model.product_id)
+                intent.putExtra(Constants.EXTRA_PRODUCT_OWNER_ID,model.user_id)
+                context.startActivity(intent)
+            }
         }
     }
 

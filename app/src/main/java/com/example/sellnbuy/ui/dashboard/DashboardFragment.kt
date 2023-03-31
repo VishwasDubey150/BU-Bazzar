@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.sellnbuy.CartList
 import com.example.sellnbuy.R
 import com.example.sellnbuy.SettingActivity
 import com.example.sellnbuy.baseFragment
@@ -57,6 +58,10 @@ class DashboardFragment : baseFragment() {
         {
             R.id.action_setting->{
                 startActivity(Intent(activity, SettingActivity::class.java))
+                return true
+            }
+            R.id.action_cart->{
+                startActivity(Intent(activity, CartList::class.java))
                 return true
             }
         }
