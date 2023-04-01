@@ -10,7 +10,7 @@ import com.myshoppal.ui.adapters.CartItemsListAdapter
 import kotlinx.android.synthetic.main.activity_cart_list.*
 import kotlinx.android.synthetic.main.item_cart_layout.*
 
-class CartList : baseActivity() {
+open class CartList : baseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cart_list)
@@ -59,4 +59,11 @@ class CartList : baseActivity() {
         super.onResume()
         getCartItemList()
     }
+
+    fun deleteprod(productID: String)
+    {
+
+    }
+
+
 }
