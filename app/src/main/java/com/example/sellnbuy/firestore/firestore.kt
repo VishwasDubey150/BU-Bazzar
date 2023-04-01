@@ -372,6 +372,44 @@ class firestore:baseActivity() {
             }
     }
 
+    fun getCartList(activity : Activity)
+    {
+        mfirestore.collection(Constants.CART_ITEMS)
+            .whereEqualTo(Constants.USER_ID,getCurrentUserID())
+            .get()
+            .addOnSuccessListener {
+                document ->
+                Log.e(activity.javaClass.simpleName, document.documents.toString())
+                val list : ArrayList<CartItem> = ArrayList()
+
+                for (i in document.documents)
+                {
+                    val cartItem=i.toObject(CartItem::class.java)!!
+                    cartItem.id=i.id
+                    list.add(cartItem)
+                }
+                when(activity)
+                {
+                    is CartList ->{
+                        activity.successCartItemsList(list)
+                    }
+                }
+            }
+            .addOnFailureListener {
+                e-> when(activity) {
+                is CartList -> {
+                    activity.hidePB()
+                }
+            }
+                Log.e(
+                    activity.javaClass.simpleName,
+                    "Error while checking the existing cart list.",
+                    e
+                )
+
+                }
+    }
+
 }
 
 

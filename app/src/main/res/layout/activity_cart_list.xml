@@ -4,22 +4,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.dashboard.DashboardFragment">
+    android:layout_height="match_parent">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/cart_rv"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="408dp"
+        android:layout_height="560dp"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="parent"
-        app:layout_constraintEnd_toStartOf="parent">
-    </androidx.recyclerview.widget.RecyclerView>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></androidx.recyclerview.widget.RecyclerView>
 
     <TextView
-        android:id="@+id/empty_text_dash"
+        android:id="@+id/empty_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -27,6 +24,7 @@
         android:layout_marginEnd="8dp"
         android:fontFamily="@font/poppins_bold"
         android:text="Cart is empty!!"
+        android:visibility="visible"
         android:textAlignment="center"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -37,66 +35,66 @@
         app:layout_constraintVertical_bias="0.412" />
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:layout_marginTop="568dp"
         android:backgroundTint="#E0E0E0"
+        android:visibility="gone"
         app:cardCornerRadius="50dp"
-        android:visibility="visible"
         app:cardElevation="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-                <androidx.appcompat.widget.LinearLayoutCompat
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
 
-                    <androidx.appcompat.widget.LinearLayoutCompat
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_marginTop="20dp"
-                        android:orientation="horizontal">
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:fontFamily="@font/poppins_bold"
-                            android:text="Total Amount     :   "
-                            android:textSize="20dp"
-                            android:layout_marginLeft="40dp">
-                        </TextView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/poppins_bold"
+                    android:text="Total Amount     :   "
+                    android:textSize="20dp"></TextView>
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:fontFamily="@font/poppins_bold"
-                            android:text="2000"
-                            android:textSize="20dp"
-                            android:layout_marginLeft="40dp">
-                        </TextView>
-                    </androidx.appcompat.widget.LinearLayoutCompat>
+                <TextView
+                    android:id="@+id/total_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/poppins_bold"
+                    android:text="2000"
+                    android:textSize="20dp"></TextView>
+            </androidx.appcompat.widget.LinearLayoutCompat>
 
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/checkout"
-                        android:layout_width="250dp"
-                        android:layout_height="70dp"
-                        android:layout_gravity="center"
-                        android:background="@drawable/btn_bg2"
-                        android:fontFamily="sans-serif-black"
-                        android:text="Checkout"
-                        android:layout_marginTop="20dp"
-                        android:textAllCaps="false"
-                        android:textColor="@color/white"
-                        android:onClick="checkout"
-                        android:textSize="30dp" />
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/checkout"
+                android:layout_width="250dp"
+                android:layout_height="70dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/btn_bg2"
+                android:fontFamily="sans-serif-black"
+                android:onClick="checkout"
+                android:text="Checkout"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="30dp" />
 
-                </androidx.appcompat.widget.LinearLayoutCompat>
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
     </androidx.cardview.widget.CardView>
 

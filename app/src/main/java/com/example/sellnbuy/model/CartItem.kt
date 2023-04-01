@@ -12,5 +12,5 @@ data class CartItem(
     var image: String="",
     var cart_quantity: String="",
     val stock_quantity:String="",
-    val id:String="",
+    var id:String="",
 ): Parcelable
