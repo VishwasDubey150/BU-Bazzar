@@ -1,8 +1,10 @@
 package com.example.sellnbuy
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.sellnbuy.firestore.firestore
 import com.example.sellnbuy.model.CartItem
@@ -60,9 +62,18 @@ open class CartList : baseActivity() {
         getCartItemList()
     }
 
-    fun deleteprod(productID: String)
-    {
+    fun checkout(view: View) {
+        startActivity(Intent(this,checkout_screen::class.java))
+    }
 
+    fun itemRemovedSuccess() {
+        hidePB()
+        Toast.makeText(
+            this@CartList,"item deleted",
+            Toast.LENGTH_SHORT
+        ).show()
+
+        getCartItemList()
     }
 
 

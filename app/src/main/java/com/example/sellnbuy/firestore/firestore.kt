@@ -393,6 +393,11 @@ class firestore:baseActivity() {
                     is CartList ->{
                         activity.successCartItemsList(list)
                     }
+
+                    is checkout_screen -> {
+                        activity.successCartItemsList(list)
+                    }
+
                 }
             }
             .addOnFailureListener {
@@ -408,6 +413,128 @@ class firestore:baseActivity() {
                 )
 
                 }
+    }
+
+    fun removeItemFromCart(context: Context, cart_id: String) {
+
+        // Cart items collection name
+        mfirestore.collection(Constants.CART_ITEMS)
+            .document(cart_id) // cart id
+            .delete()
+            .addOnSuccessListener {
+
+                // Notify the success result of the removed cart item from the list to the base class.
+                when (context) {
+                    is CartList -> {
+                        context.itemRemovedSuccess()
+                    }
+                }
+            }
+            .addOnFailureListener { e ->
+
+                // Hide the progress dialog if there is any error.
+                when (context) {
+                    is CartList -> {
+                        context.hidePB()
+                    }
+                }
+                Log.e(
+                    context.javaClass.simpleName,
+                    "Error while removing the item from the cart list.",
+                    e
+                )
+            }
+    }
+
+    fun getaddress(activity: Activity) {
+        mfirestore.collection(Constants.USERS)
+            .document(getCurrentUserID())
+            .get()
+            .addOnSuccessListener { document ->
+                Log.i(activity.javaClass.simpleName, document.toString())
+                val user = document.toObject(User::class.java)!!
+                when (activity) {
+                    is login -> {
+                        activity.userLoggedInSuccess(user)
+                    }
+                }
+
+                val sharedPreferences = activity.getSharedPreferences(
+                    Constants.Sellnbuy_pref,
+                    Context.MODE_PRIVATE)
+
+                val editor: SharedPreferences.Editor = sharedPreferences.edit()
+                editor.putString(
+                    Constants.Loggedin_un,
+                    "${user.Username}"
+                )
+                editor.apply()
+
+                when (activity) {
+                    is login -> {
+                        activity.userLoggedInSuccess(user)
+                    }
+                    is SettingActivity -> {
+                        activity.userDetailsSuccess(user)
+                    }
+                    is checkout_screen-> {
+                        activity.useraddressSuccess(user)
+                    }
+                }
+
+            }
+            .addOnFailureListener { e ->
+
+                when (activity) {
+                    is login -> {
+                        activity.hidePB()
+                    }
+                    is SettingActivity -> {
+                        activity.hidePB()
+                    }
+                }
+            }
+    }
+
+    fun getAllProductsList(activity: Activity) {
+        // END
+        // The collection name for PRODUCTS
+        mfirestore.collection(Constants.PRODUCTS)
+            .get() // Will get the documents snapshots.
+            .addOnSuccessListener { document ->
+
+                // Here we get the list of boards in the form of documents.
+                Log.e("Products List", document.documents.toString())
+
+                // Here we have created a new instance for Products ArrayList.
+                val productsList: ArrayList<Product> = ArrayList()
+
+                // A for loop as per the list of documents to convert them into Products ArrayList.
+                for (i in document.documents) {
+
+                    val product = i.toObject(Product::class.java)
+                    product!!.product_id = i.id
+
+                    productsList.add(product)
+                }
+
+                when (activity) {
+                    is checkout_screen -> {
+                        activity.successProductsListFromFireStore(productsList)
+                    }
+                }
+            }
+            .addOnFailureListener { e ->
+                // Hide the progress dialog if there is any error based on the base class instance.
+                when (activity) {
+
+                    is checkout_screen -> {
+                        activity.hidePB()
+                    }
+                }
+
+                Log.e("Get Product List", "Error while getting all product list.", e)
+            }
     }
 
 }

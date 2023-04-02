@@ -32,8 +32,9 @@
     </TextView>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_ck"
         android:layout_width="match_parent"
-        android:layout_height="200dp">
+        android:layout_height="220dp">
     </androidx.recyclerview.widget.RecyclerView>
 
     <TextView
@@ -48,6 +49,7 @@
     </TextView>
 
     <TextView
+        android:id="@+id/curr_address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Muradnager, Ghaziabad"

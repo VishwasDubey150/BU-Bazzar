@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.sellnbuy.CartList
 import com.example.sellnbuy.GlideLoader
 import com.example.sellnbuy.R
+import com.example.sellnbuy.firestore.firestore
 import com.example.sellnbuy.model.CartItem
 import kotlinx.android.synthetic.main.item_cart_layout.view.*
 import kotlinx.android.synthetic.main.item_cart_layout.view.delete
@@ -36,7 +37,12 @@ open class CartItemsListAdapter(
         }
 
         holder.itemView.delete.setOnClickListener {
+            when (context) {
+                is CartList -> {
+                }
+            }
 
+            firestore().removeItemFromCart(context, model.id)
         }
     }
 
