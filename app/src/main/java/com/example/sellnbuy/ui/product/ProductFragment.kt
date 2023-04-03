@@ -35,7 +35,7 @@ class ProductFragment : baseFragment() {
 
         if(productsList.size>0)
         {
-            empty_text.visibility=View.GONE
+            etext.visibility=View.GONE
             prod_rv.visibility=View.VISIBLE
 
             prod_rv.layoutManager=LinearLayoutManager(activity)
@@ -45,7 +45,7 @@ class ProductFragment : baseFragment() {
 
         else
         {
-            empty_text.visibility=View.VISIBLE
+            etext.visibility=View.VISIBLE
             prod_rv.visibility=View.GONE
         }
     }

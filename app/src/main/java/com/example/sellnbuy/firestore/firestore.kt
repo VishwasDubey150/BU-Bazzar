@@ -12,6 +12,7 @@ import com.example.sellnbuy.model.CartItem
 import com.example.sellnbuy.model.Order
 import com.example.sellnbuy.model.Product
 import com.example.sellnbuy.model.User
+import com.example.sellnbuy.ui.Order.OrderFragment
 import com.example.sellnbuy.ui.dashboard.DashboardFragment
 import com.example.sellnbuy.ui.product.ProductFragment
 import com.google.firebase.auth.FirebaseAuth
@@ -580,6 +581,29 @@ class firestore:baseActivity() {
             Log.e(activity.javaClass.simpleName, "Error while registering the user.", e)
 
         }
+    }
+
+    fun getMyOrdersList(fragment: OrderFragment)
+    {
+        mfirestore.collection(Constants.ORDERS)
+            .whereEqualTo(Constants.USER_ID,getCurrentUserID())
+            .get()
+            .addOnSuccessListener { document->
+                val list: ArrayList<Order> =ArrayList()
+
+                for (i in document.documents)
+                {
+                    val orderItem=i.toObject(Order::class.java)!!
+                    orderItem.id=i.id
+
+                    list.add(orderItem)
+                }
+                fragment.populateOrdersListInUI(list)
+            }.addOnFailureListener { e->
+                fragment.hidePB()
+                Log.e(fragment.javaClass.simpleName, "Error while registering the user.", e)
+
+            }
     }
 
 
