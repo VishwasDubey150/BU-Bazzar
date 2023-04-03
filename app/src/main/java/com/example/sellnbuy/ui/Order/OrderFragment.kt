@@ -6,9 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.example.sellnbuy.baseFragment
 import com.example.sellnbuy.databinding.FragmentOrdersBinding
 
-class OrderFragment : Fragment() {
+class OrderFragment : baseFragment() {
 
     private var _binding: FragmentOrdersBinding? = null
 
@@ -21,14 +22,10 @@ class OrderFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-      //  val notificationsViewModel = ViewModelProvider(this).get(NotificationsViewModel::class.java)
 
         _binding = FragmentOrdersBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textNotifications
-        //notificationsViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = "It is notification fragment"
 
         return root
     }

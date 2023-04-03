@@ -45,39 +45,39 @@ class SettingActivity : baseActivity() {
         finish()
     }
 
-    fun updateprofile(view: View) {
+//    fun updateprofile(view: View) {
+//
+//
+//        val intent=Intent(this@SettingActivity,profile::class.java)
+//        startActivity(intent)
+//    }
 
-
-        val intent=Intent(this@SettingActivity,profile::class.java)
-        startActivity(intent)
-    }
-
-    private fun getUserDetails()
-    {
-        showPB()
-        firestore().getUserDetails(this)
-    }
-
-    fun userDetailsSuccess(user:com.example.sellnbuy.model.User)
-    {
-        var image=findViewById<ImageView>(R.id.iv_profile)
-        var name=findViewById<TextView>(R.id.name2)
-        var email=findViewById<TextView>(R.id.email2)
-        var mobile=findViewById<TextView>(R.id.mobile2)
-        var address=findViewById<TextView>(R.id.address2)
-        var gender=findViewById<TextView>(R.id.gender2)
-        hidePB()
-        GlideLoader(this@SettingActivity).loadUserPicture(user.image,image)
-        name.text="${user.Username}"
-        email.text="${user.email}"
-        mobile.text="${user.mobile}"
-        address.text="${user.address}"
-        gender.text="${user.gender}"
-
-    }
-
-    override fun onResume() {
-        super.onResume()
-        getUserDetails()
-    }
+//    private fun getUserDetails()
+//    {
+//        showPB()
+//        firestore().getUserDetails(this)
+//    }
+//
+//    fun userDetailsSuccess(user:com.example.sellnbuy.model.User)
+//    {
+//        var image=findViewById<ImageView>(R.id.iv_profile)
+//        var name=findViewById<TextView>(R.id.name2)
+//        var email=findViewById<TextView>(R.id.email2)
+//        var mobile=findViewById<TextView>(R.id.mobile2)
+//        var address=findViewById<TextView>(R.id.address2)
+//        var gender=findViewById<TextView>(R.id.gender2)
+//        hidePB()
+//        GlideLoader(this@SettingActivity).loadUserPicture(user.image,image)
+//        name.text="${user.Username}"
+//        email.text="${user.email}"
+//        mobile.text="${user.mobile}"
+//        address.text="${user.address}"
+//        gender.text="${user.gender}"
+//
+//    }
+//
+//    override fun onResume() {
+//        super.onResume()
+//        getUserDetails()
+//    }
 }

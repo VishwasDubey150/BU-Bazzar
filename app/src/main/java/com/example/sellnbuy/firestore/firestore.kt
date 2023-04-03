@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.sellnbuy.*
 import com.example.sellnbuy.model.CartItem
+import com.example.sellnbuy.model.Order
 import com.example.sellnbuy.model.Product
 import com.example.sellnbuy.model.User
 import com.example.sellnbuy.ui.dashboard.DashboardFragment
@@ -75,7 +76,7 @@ class firestore:baseActivity() {
                         activity.userLoggedInSuccess(user)
                     }
                     is SettingActivity -> {
-                        activity.userDetailsSuccess(user)
+                       // activity.userDetailsSuccess(user)
                     }
                 }
 
@@ -475,7 +476,7 @@ class firestore:baseActivity() {
                         activity.userLoggedInSuccess(user)
                     }
                     is SettingActivity -> {
-                        activity.userDetailsSuccess(user)
+                        //activity.userDetailsSuccess(user)
                     }
                     is checkout_screen-> {
                         activity.useraddressSuccess(user)
@@ -536,6 +537,52 @@ class firestore:baseActivity() {
                 Log.e("Get Product List", "Error while getting all product list.", e)
             }
     }
+
+    fun placeOrder(activity: checkout_screen,order: Order)
+    {
+        mfirestore.collection(Constants.ORDERS)
+            .document()
+            .set(order, SetOptions.merge())
+            .addOnSuccessListener {
+                activity.orderplacedSuccess()
+            }
+            .addOnFailureListener { e ->
+                activity.hidePB()
+                Log.e(activity.javaClass.simpleName, "Error while registering the user.", e)
+            }
+    }
+
+    fun updateAllDetails(activity: checkout_screen,cartList: ArrayList<CartItem>)
+    {
+        val writeBatch = mfirestore.batch()
+        for(cartItem in cartList)
+        {
+            val productHashmap = HashMap<String, Any>()
+
+            productHashmap[Constants.STOCK_QUANTITY]=(cartItem.stock_quantity.toInt() -1)
+
+            val documentReference = mfirestore.collection(Constants.PRODUCTS)
+                .document(cartItem.product_id)
+
+            writeBatch.update(documentReference,productHashmap)
+        }
+
+        for (cartItem in cartList)
+        {
+            val documentRefrence=mfirestore.collection(Constants.CART_ITEMS)
+                .document(cartItem.id)
+            writeBatch.delete(documentRefrence)
+        }
+        writeBatch.commit().addOnSuccessListener {
+            activity.allDetailsUpdatedSuccessfully()
+        }.addOnFailureListener { e->
+            activity.hidePB()
+            Log.e(activity.javaClass.simpleName, "Error while registering the user.", e)
+
+        }
+    }
+
+
 
 }
 
