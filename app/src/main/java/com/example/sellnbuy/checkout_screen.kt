@@ -18,6 +18,8 @@ import kotlinx.android.synthetic.main.item_cart_layout.*
 
 class checkout_screen : baseActivity() {
     private lateinit var mProductsList: ArrayList<Product>
+    private lateinit var mOrderDetails:Order
+
 
     var mAdress:String=""
     var mContact:String=""
@@ -105,7 +107,7 @@ class checkout_screen : baseActivity() {
     {
         showPB()
 
-        val order=Order(
+        mOrderDetails=Order(
             firestore().getCurrentUserID(),
             mCartItemsList,
             mAdress,
@@ -115,7 +117,7 @@ class checkout_screen : baseActivity() {
             mContact
         )
 
-        firestore().placeOrder(this,order)
+        firestore().placeOrder(this,mOrderDetails)
 
     }
 
@@ -134,7 +136,7 @@ class checkout_screen : baseActivity() {
 
         startActivity(intent)
         finish()
-        //firestore().updateAllDetails(this,mCartItemsList)
+        firestore().updateAllDetails(this,mCartItemsList,mOrderDetails)
     }
 
     fun allDetailsUpdatedSuccessfully() {

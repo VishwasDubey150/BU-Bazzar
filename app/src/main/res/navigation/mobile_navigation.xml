@@ -22,4 +22,10 @@
         android:name="com.example.sellnbuy.ui.Order.OrderFragment"
         android:label="Orders"
         tools:layout="@layout/fragment_orders" />
+
+    <fragment
+        android:id="@+id/navigation_sold"
+        android:name="com.example.sellnbuy.SoldFragment"
+        android:label="Sold Products"
+        tools:layout="@layout/fragment_sold" />
 </navigation>

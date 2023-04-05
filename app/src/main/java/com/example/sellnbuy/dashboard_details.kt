@@ -66,6 +66,7 @@ class dashboard_details : baseActivity() {
     {
         val atc=CartItem(
             firestore().getCurrentUserID(),
+            mProductOwnerId,
             mProductId,
             mProductDetails.title,
             mProductDetails.price,

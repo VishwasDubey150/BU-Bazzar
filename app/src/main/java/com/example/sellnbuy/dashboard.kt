@@ -28,7 +28,7 @@ class dashboard : AppCompatActivity() {
 
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_Order, R.id.navigation_dashboard, R.id.navigation_Product
+                R.id.navigation_Order, R.id.navigation_dashboard, R.id.navigation_Product,R.id.navigation_sold
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)

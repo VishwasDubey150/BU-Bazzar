@@ -35,6 +35,7 @@ object Constants {
     const val CART_ITEMS:String="cart_items";
     const val ORDERS: String="orders"
     const val STOCK_QUANTITY: String="stock_quantity"
+    const val SOLD_PRODUCTS: String="sold_products"
 
     fun showImageChooser(activity: Activity) {
         val galleryIntent = Intent(

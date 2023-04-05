@@ -8,10 +8,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.sellnbuy.*
-import com.example.sellnbuy.model.CartItem
-import com.example.sellnbuy.model.Order
-import com.example.sellnbuy.model.Product
-import com.example.sellnbuy.model.User
+import com.example.sellnbuy.model.*
 import com.example.sellnbuy.ui.Order.OrderFragment
 import com.example.sellnbuy.ui.dashboard.DashboardFragment
 import com.example.sellnbuy.ui.product.ProductFragment
@@ -20,6 +17,8 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import io.grpc.InternalChannelz.id
+import kotlinx.android.synthetic.main.fragment_sold.*
 
 class firestore:baseActivity() {
     private val mfirestore = FirebaseFirestore.getInstance()
@@ -553,19 +552,28 @@ class firestore:baseActivity() {
             }
     }
 
-    fun updateAllDetails(activity: checkout_screen,cartList: ArrayList<CartItem>)
+    fun updateAllDetails(activity: checkout_screen,cartList: ArrayList<CartItem>,order: Order)
     {
         val writeBatch = mfirestore.batch()
         for(cartItem in cartList)
         {
-            val productHashmap = HashMap<String, Any>()
+           // val productHashmap = HashMap<String, Any>()
 
-            productHashmap[Constants.STOCK_QUANTITY]=(cartItem.stock_quantity.toInt() -1)
+            //productHashmap[Constants.STOCK_QUANTITY]=(cartItem.stock_quantity.toInt() -1)
 
-            val documentReference = mfirestore.collection(Constants.PRODUCTS)
+            val soldProducts=SoldProducts(
+                firestore().getCurrentUserID(),
+                cartItem.title,
+                cartItem.price,
+                cartItem.cart_quantity,
+                cartItem.image,
+                order.title,
+                order.total_amount,order.address
+            )
+            val documentReference=mfirestore.collection(Constants.SOLD_PRODUCTS)
                 .document(cartItem.product_id)
 
-            writeBatch.update(documentReference,productHashmap)
+            writeBatch.set(documentReference,soldProducts)
         }
 
         for (cartItem in cartList)
@@ -603,6 +611,42 @@ class firestore:baseActivity() {
                 fragment.hidePB()
                 Log.e(fragment.javaClass.simpleName, "Error while registering the user.", e)
 
+            }
+    }
+
+    fun getSoldProductsList(fragment: SoldFragment) {
+
+        mfirestore.collection(Constants.SOLD_PRODUCTS)
+            .whereEqualTo(Constants.USER_ID, getCurrentUserID())
+            .get() // Will get the documents snapshots.
+            .addOnSuccessListener { document ->
+                // Here we get the list of sold products in the form of documents.
+                Log.e(fragment.javaClass.simpleName, document.documents.toString())
+
+                // Here we have created a new instance for Sold Products ArrayList.
+                val list: ArrayList<SoldProducts> = ArrayList()
+
+                // A for loop as per the list of documents to convert them into Sold Products ArrayList.
+                for (i in document.documents) {
+
+                    val soldProduct = i.toObject(SoldProducts::class.java)!!
+                    soldProduct.id = i.id
+
+                    list.add(soldProduct)
+                }
+
+                fragment.successSoldProductsList(list)
+                // END
+            }
+            .addOnFailureListener { e ->
+                // Hide the progress dialog if there is any error.
+                fragment.hidePB()
+
+                Log.e(
+                    fragment.javaClass.simpleName,
+                    "Error while getting the list of sold products.",
+                    e
+                )
             }
     }
 
