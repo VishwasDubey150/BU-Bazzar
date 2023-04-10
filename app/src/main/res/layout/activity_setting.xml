@@ -24,6 +24,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="35dp"
+                android:onClick="b_dashboard"
                 android:src="@drawable/ic_baseline_arrow_back_ios_24"
                 android:layout_marginLeft="10dp">
             </ImageView>
@@ -117,21 +118,6 @@
         android:fontFamily="@font/poppins_bold"
         android:text="Male">
     </TextView>
-
-    <Button
-        android:id="@+id/edit_profile"
-        android:layout_width="70dp"
-        android:backgroundTint="#DFDFDF"
-        android:layout_height="40dp"
-        android:fontFamily="@font/poppins_bold"
-        android:onClick="updateprofile"
-        android:text="edit"
-        android:textColor="#5D5C5C"
-        android:layout_marginTop="10dp"
-        android:textAllCaps="false"
-        android:textSize="13dp"
-        android:layout_gravity="center"/>
-
 
 
     <Button

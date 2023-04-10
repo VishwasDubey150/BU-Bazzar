@@ -57,7 +57,7 @@ class dashboard_details : baseActivity() {
         hidePB()
         GlideLoader(this@dashboard_details).loadProductPicture(product.p_image,dash_img)
         dash_title.text = product.title
-        dash_price.text = "₹${product.price}"
+        dash_price.text = "${product.price}"
         dash_description.text = product.description
         dash_stock_left.text = "only ${product.stock_quantity} left!!"
     }
@@ -67,7 +67,6 @@ class dashboard_details : baseActivity() {
         val atc=CartItem(
             firestore().getCurrentUserID(),
             mProductOwnerId,
-            mProductId,
             mProductDetails.title,
             mProductDetails.price,
             mProductDetails.p_image,
@@ -98,5 +97,10 @@ class dashboard_details : baseActivity() {
         add_to_cart.visibility=View.GONE
         go_to_cart.visibility=View.VISIBLE
         added.visibility=View.VISIBLE
+    }
+
+    fun d_back(view: View) {
+        val intent=Intent(this,dashboard::class.java)
+        startActivity(intent)
     }
 }

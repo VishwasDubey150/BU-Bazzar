@@ -18,7 +18,6 @@ open class CartList : baseActivity() {
         setContentView(R.layout.activity_cart_list)
         supportActionBar?.hide()
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
-
     }
 
     fun successCartItemsList(cartList: ArrayList<CartItem>)
@@ -41,8 +40,8 @@ open class CartList : baseActivity() {
                 val price=item.price.toInt()
                 total=price+total
             }
-            total_price.text="₹${total}"
-        }
+            total_price.text="${total}"
+    }
         else
         {
             cart_rv.visibility=View.GONE
@@ -75,6 +74,4 @@ open class CartList : baseActivity() {
 
         getCartItemList()
     }
-
-
 }

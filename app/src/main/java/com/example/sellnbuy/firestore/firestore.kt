@@ -58,17 +58,16 @@ class firestore:baseActivity() {
                     is login -> {
                         activity.userLoggedInSuccess(user)
                     }
+
+                    is SettingActivity -> {
+                        //activity.userDetailsSuccess(user)
+                    }
                 }
 
-                val sharedPreferences = activity.getSharedPreferences(
-                    Constants.Sellnbuy_pref,
-                    Context.MODE_PRIVATE)
+                val sharedPreferences = activity.getSharedPreferences(Constants.Sellnbuy_pref,Context.MODE_PRIVATE)
 
                 val editor: SharedPreferences.Editor = sharedPreferences.edit()
-                editor.putString(
-                    Constants.Loggedin_un,
-                    "${user.Username}"
-                )
+                editor.putString(Constants.Loggedin_un,"${user.Username}")
                 editor.apply()
 
                 when (activity) {
@@ -79,7 +78,6 @@ class firestore:baseActivity() {
                        // activity.userDetailsSuccess(user)
                     }
                 }
-
             }
             .addOnFailureListener { e ->
 
@@ -379,7 +377,7 @@ class firestore:baseActivity() {
             .whereEqualTo(Constants.USER_ID,getCurrentUserID())
             .get()
             .addOnSuccessListener {
-                document ->
+                    document ->
                 Log.e(activity.javaClass.simpleName, document.documents.toString())
                 val list : ArrayList<CartItem> = ArrayList()
 
@@ -402,7 +400,7 @@ class firestore:baseActivity() {
                 }
             }
             .addOnFailureListener {
-                e-> when(activity) {
+                    e-> when(activity) {
                 is CartList -> {
                     activity.hidePB()
                 }
@@ -413,7 +411,7 @@ class firestore:baseActivity() {
                     e
                 )
 
-                }
+            }
     }
 
     fun removeItemFromCart(context: Context, cart_id: String) {
@@ -479,10 +477,9 @@ class firestore:baseActivity() {
                         //activity.userDetailsSuccess(user)
                     }
                     is checkout_screen-> {
-                        activity.useraddressSuccess(user)
+                       activity.useraddressSuccess(user)
                     }
                 }
-
             }
             .addOnFailureListener { e ->
 
@@ -557,10 +554,6 @@ class firestore:baseActivity() {
         val writeBatch = mfirestore.batch()
         for(cartItem in cartList)
         {
-           // val productHashmap = HashMap<String, Any>()
-
-            //productHashmap[Constants.STOCK_QUANTITY]=(cartItem.stock_quantity.toInt() -1)
-
             val soldProducts=SoldProducts(
                 firestore().getCurrentUserID(),
                 cartItem.title,
@@ -571,7 +564,7 @@ class firestore:baseActivity() {
                 order.total_amount,order.address
             )
             val documentReference=mfirestore.collection(Constants.SOLD_PRODUCTS)
-                .document(cartItem.product_id)
+                .document()
 
             writeBatch.set(documentReference,soldProducts)
         }

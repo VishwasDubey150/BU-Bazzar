@@ -169,7 +169,6 @@ fun showImageChooser(activity: Activity) {
 
         val product=Product(
             firestore().getCurrentUserID(),
-            username,
             title.text.toString().trim{ it <= ' '},
             price.text.toString().trim{ it <=' '},
             description.text.toString().trim{ it <=' '},

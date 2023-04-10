@@ -33,12 +33,13 @@ open class CartItemsListAdapter(
 
             GlideLoader(context).loadProductPicture(model.image, holder.itemView.img)
             holder.itemView.name.text = model.title
-            holder.itemView.price.text = "₹${model.price}"
+            holder.itemView.price.text = "${model.price}"
         }
 
         holder.itemView.delete.setOnClickListener {
             when (context) {
                 is CartList -> {
+                    firestore().removeItemFromCart(context, model.id)
                 }
             }
 

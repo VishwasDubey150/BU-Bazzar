@@ -45,13 +45,6 @@ class SettingActivity : baseActivity() {
         finish()
     }
 
-//    fun updateprofile(view: View) {
-//
-//
-//        val intent=Intent(this@SettingActivity,profile::class.java)
-//        startActivity(intent)
-//    }
-
 //    private fun getUserDetails()
 //    {
 //        showPB()
@@ -80,4 +73,9 @@ class SettingActivity : baseActivity() {
 //        super.onResume()
 //        getUserDetails()
 //    }
+
+    fun b_dashboard(view: View) {
+        val intent=Intent(this@SettingActivity,dashboard::class.java)
+        startActivity(intent)
+    }
 }

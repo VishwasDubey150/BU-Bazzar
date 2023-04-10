@@ -56,4 +56,14 @@
         android:fontFamily="@font/poppins_bold">
     </TextView>
 
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="right"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="-450dp"
+        android:onClick="p_back"
+        android:src="@drawable/cut">
+    </ImageView>
+
   </androidx.appcompat.widget.LinearLayoutCompat>

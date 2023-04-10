@@ -12,6 +12,7 @@ import com.example.sellnbuy.model.Order
 import com.example.sellnbuy.model.Product
 import com.google.firebase.firestore.auth.User
 import com.myshoppal.ui.adapters.CartItemsListAdapter
+import kotlinx.android.synthetic.main.activity_cart_list.*
 import kotlinx.android.synthetic.main.activity_checkout_screen.*
 import kotlinx.android.synthetic.main.activity_profile.*
 import kotlinx.android.synthetic.main.item_cart_layout.*
@@ -50,9 +51,6 @@ class checkout_screen : baseActivity() {
         showPB()
         firestore().getaddress(this)
     }
-
-
-
     fun useraddressSuccess(user: com.example.sellnbuy.model.User) {
 
         curr_address.text = user.address
@@ -86,17 +84,15 @@ class checkout_screen : baseActivity() {
 
         val cartListAdapter = CartItemsListAdapter(this@checkout_screen, mCartItemsList)
         rv_ck.adapter = cartListAdapter
-
-        for(item in mCartItemsList)
+        val carListAdapter=CartItemsListAdapter(this,cartList)
+        rv_ck.adapter=carListAdapter
+        var mtotal: Int=0
+        for (item in cartList)
         {
             val price=item.price.toInt()
-            mtotal=mtotal+price
+            mtotal=price+mtotal
         }
-        cost.text="₹${mtotal.toString()}"
-        ctotal=mtotal.toString()
-
-
-
+        cost.text="₹${mtotal}"
     }
 
     private fun getProductList() {
@@ -114,8 +110,7 @@ class checkout_screen : baseActivity() {
             "My order ${System.currentTimeMillis()}",
             mCartItemsList[0].image,
             ctotal,
-            mContact
-        )
+            mContact)
 
         firestore().placeOrder(this,mOrderDetails)
 

@@ -1,5 +1,6 @@
 package com.example.sellnbuy
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -33,9 +34,14 @@ class ProductDetails : baseActivity() {
             GlideLoader(this@ProductDetails).loadProductPicture(product.p_image,pro_img)
 
             pro_title.text = product.title
-            pro_price.text = "$${product.price}"
+            pro_price.text = "${product.price}"
             pro_description.text = product.description
             pro_stock_left.text = "only ${product.stock_quantity} left!!"
         }
+
+    fun p_back(view: View) {
+        val intent=Intent(this@ProductDetails,dashboard::class.java)
+        startActivity(intent)
+    }
 
 }
