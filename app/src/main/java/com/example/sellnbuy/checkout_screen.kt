@@ -34,12 +34,8 @@ class checkout_screen : baseActivity() {
         supportActionBar?.hide()
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
         rv_ck.visibility=View.VISIBLE
-
         getProductList()
-        usermobile(user= com.example.sellnbuy.model.User())
-
-
-    }
+        }
 
     override fun onResume() {
         super.onResume()
@@ -47,21 +43,16 @@ class checkout_screen : baseActivity() {
     }
 
     private fun getaddress() {
-        showPB()
+        
         firestore().getaddress(this)
     }
     fun useraddressSuccess(user: com.example.sellnbuy.model.User) {
 
         curr_address.text = user.address
         mAdress=user.address
-        hidePB()
-    }
-
-    fun usermobile(user: com.example.sellnbuy.model.User) {
-
-        mContact=user.address
 
     }
+
     fun successProductsListFromFireStore(productsList: ArrayList<Product>) {
 
         mProductsList = productsList
@@ -71,6 +62,7 @@ class checkout_screen : baseActivity() {
     }
 
     private fun getCartItemsList() {
+        showPB()
         firestore().getCartList(this@checkout_screen)
     }
 

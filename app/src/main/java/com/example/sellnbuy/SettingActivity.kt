@@ -15,7 +15,6 @@ import com.google.firebase.firestore.auth.User
 
 class SettingActivity : baseActivity() {
 
-    private lateinit var mUserDetails :User
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -66,7 +65,6 @@ class SettingActivity : baseActivity() {
         mobile.text="${user.mobile}"
         address.text="${user.address}"
         gender.text="${user.gender}"
-
     }
 
     override fun onResume() {

@@ -173,9 +173,6 @@ class firestore:baseActivity() {
                             hidePB()
                         }
                     }
-
-
-
                     Log.e(
                         activity.javaClass.simpleName,
                         exception.message,
