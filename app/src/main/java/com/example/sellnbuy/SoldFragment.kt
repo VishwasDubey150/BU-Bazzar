@@ -32,8 +32,6 @@ class SoldFragment : baseFragment() {
         getSoldProductsList()
     }
 
-    // TODO Step 4: Create a function to get the list of sold products.
-    // START
     private fun getSoldProductsList() {
         // Show the progress dialog.
         showPB()

@@ -60,7 +60,7 @@ class firestore:baseActivity() {
                     }
 
                     is SettingActivity -> {
-                        //activity.userDetailsSuccess(user)
+                        activity.userDetailsSuccess(user)
                     }
                 }
 
@@ -75,7 +75,7 @@ class firestore:baseActivity() {
                         activity.userLoggedInSuccess(user)
                     }
                     is SettingActivity -> {
-                       // activity.userDetailsSuccess(user)
+                        activity.userDetailsSuccess(user)
                     }
                 }
             }
@@ -474,7 +474,7 @@ class firestore:baseActivity() {
                         activity.userLoggedInSuccess(user)
                     }
                     is SettingActivity -> {
-                        //activity.userDetailsSuccess(user)
+                        activity.userDetailsSuccess(user)
                     }
                     is checkout_screen-> {
                        activity.useraddressSuccess(user)

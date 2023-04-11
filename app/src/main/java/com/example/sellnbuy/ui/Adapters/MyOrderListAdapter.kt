@@ -28,10 +28,8 @@ class MyOrderListAdapter (
                 model.image,
                 holder.itemView.product_img
             )
-
             holder.itemView.item_name.text = model.title
             holder.itemView.item_price.text = "$${model.total_amount}"
-
             holder.itemView.delete.visibility = View.GONE
         }
     }
