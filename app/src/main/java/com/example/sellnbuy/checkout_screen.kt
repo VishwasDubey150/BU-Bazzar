@@ -37,9 +37,7 @@ class checkout_screen : baseActivity() {
         rv_ck.visibility=View.VISIBLE
 
         getProductList()
-        usermobile(user = com.example.sellnbuy.model.User())
-
-
+        usermobile(user=com.example.sellnbuy.model.User())
     }
 
     override fun onResume() {

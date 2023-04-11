@@ -57,7 +57,7 @@ class dashboard_details : baseActivity() {
         hidePB()
         GlideLoader(this@dashboard_details).loadProductPicture(product.p_image,dash_img)
         dash_title.text = product.title
-        dash_price.text = "${product.price}"
+        dash_price.text = "₹${product.price}"
         dash_description.text = product.description
         dash_stock_left.text = "only ${product.stock_quantity} left!!"
     }

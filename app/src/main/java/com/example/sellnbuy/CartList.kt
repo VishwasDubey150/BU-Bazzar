@@ -40,7 +40,7 @@ open class CartList : baseActivity() {
                 val price=item.price.toInt()
                 total=price+total
             }
-            total_price.text="${total}"
+            total_price.text="₹${total}"
     }
         else
         {
