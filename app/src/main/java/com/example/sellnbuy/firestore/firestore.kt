@@ -494,6 +494,8 @@ class firestore:baseActivity() {
             }
     }
 
+
+
     fun getAllProductsList(activity: Activity) {
         // END
         // The collection name for PRODUCTS

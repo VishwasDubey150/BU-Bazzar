@@ -8,7 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.sellnbuy.GlideLoader
 import com.example.sellnbuy.R
 import com.example.sellnbuy.model.Order
+import kotlinx.android.synthetic.main.item_cart_layout.view.*
 import kotlinx.android.synthetic.main.item_list_layout.view.*
+import kotlinx.android.synthetic.main.item_list_layout.view.delete
 
 class MyOrderListAdapter (
     private val context: Context,
@@ -29,8 +31,8 @@ class MyOrderListAdapter (
                 holder.itemView.product_img
             )
             holder.itemView.item_name.text = model.title
-            holder.itemView.item_price.text = "$${model.total_amount}"
-            holder.itemView.delete.visibility = View.GONE
+            holder.itemView.item_price.text = "₹${model.total_amount}"
+            holder.itemView.delete.visibility=View.GONE
         }
     }
 

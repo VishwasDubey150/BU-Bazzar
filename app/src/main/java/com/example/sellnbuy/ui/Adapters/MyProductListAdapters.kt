@@ -36,6 +36,7 @@ open class MyProductListAdapters(
             holder.itemView.item_name.text=model.title
             holder.itemView.item_price.text="₹${model.price}"
 
+
             holder.itemView.delete.setOnClickListener {
                 fragment.deleteProduct(model.product_id)
             }

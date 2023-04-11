@@ -20,12 +20,11 @@ import kotlinx.android.synthetic.main.item_cart_layout.*
 class checkout_screen : baseActivity() {
     private lateinit var mProductsList: ArrayList<Product>
     private lateinit var mOrderDetails:Order
-
-
+    var mtotal: Int=0
     var mAdress:String=""
+
     var mContact:String=""
-    var ctotal:String=""
-    private var mtotal:Int=0
+
 
     private lateinit var mCartItemsList: ArrayList<CartItem>
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,7 +36,9 @@ class checkout_screen : baseActivity() {
         rv_ck.visibility=View.VISIBLE
 
         getProductList()
-        usermobile(user=com.example.sellnbuy.model.User())
+        usermobile(user= com.example.sellnbuy.model.User())
+
+
     }
 
     override fun onResume() {
@@ -84,7 +85,7 @@ class checkout_screen : baseActivity() {
         rv_ck.adapter = cartListAdapter
         val carListAdapter=CartItemsListAdapter(this,cartList)
         rv_ck.adapter=carListAdapter
-        var mtotal: Int=0
+
         for (item in cartList)
         {
             val price=item.price.toInt()
@@ -105,9 +106,9 @@ class checkout_screen : baseActivity() {
             firestore().getCurrentUserID(),
             mCartItemsList,
             mAdress,
-            "My order ${System.currentTimeMillis()}",
+            mCartItemsList[0].title,
             mCartItemsList[0].image,
-            ctotal,
+            mtotal.toString(),
             mContact)
 
         firestore().placeOrder(this,mOrderDetails)
