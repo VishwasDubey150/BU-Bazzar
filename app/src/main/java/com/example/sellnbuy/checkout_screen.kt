@@ -43,7 +43,7 @@ class checkout_screen : baseActivity() {
     }
 
     private fun getaddress() {
-        
+
         firestore().getaddress(this)
     }
     fun useraddressSuccess(user: com.example.sellnbuy.model.User) {
