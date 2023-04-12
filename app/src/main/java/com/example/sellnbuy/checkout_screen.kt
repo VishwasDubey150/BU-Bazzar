@@ -26,6 +26,8 @@ class checkout_screen : baseActivity() {
     var mContact:String=""
 
 
+
+
     private lateinit var mCartItemsList: ArrayList<CartItem>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

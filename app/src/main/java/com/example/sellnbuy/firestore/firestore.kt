@@ -560,7 +560,8 @@ class firestore:baseActivity() {
                 cartItem.cart_quantity,
                 cartItem.image,
                 order.title,
-                order.total_amount,order.address
+                order.total_amount,
+                order.address
             )
             val documentReference=mfirestore.collection(Constants.SOLD_PRODUCTS)
                 .document()

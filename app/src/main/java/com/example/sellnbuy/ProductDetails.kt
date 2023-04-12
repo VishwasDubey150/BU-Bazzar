@@ -10,6 +10,7 @@ import kotlinx.android.synthetic.main.activity_product_details.*
 
 class ProductDetails : baseActivity() {
     private var mProductId:String=""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_product_details)
@@ -18,9 +19,8 @@ class ProductDetails : baseActivity() {
 
         if (intent.hasExtra(Constants.EXTRA_PROODUCT_ID)) {
             mProductId = intent.getStringExtra(Constants.EXTRA_PROODUCT_ID)!!
-            Log.i("Product Id", mProductId)
-        }
 
+        }
         getProductDetails()
     }
 
